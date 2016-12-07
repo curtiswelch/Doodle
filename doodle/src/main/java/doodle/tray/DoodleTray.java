@@ -6,8 +6,6 @@ import java.awt.PopupMenu;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import doodle.Doodle;
 import doodle.Strings;
@@ -36,31 +34,7 @@ public class DoodleTray extends TrayIcon {
 
         this.setPopupMenu(menu);
 
-        this.addMouseListener(new MouseListener() {
-            @Override
-			public void mouseClicked(MouseEvent event) {
-                if (event.getButton() == MouseEvent.BUTTON1) {
-                	doodle.toggleView();
-                }
-            }
-
-            @Override
-			public void mouseEntered(MouseEvent event) {
-            }
-
-            @Override
-			public void mouseExited(MouseEvent event) {
-            }
-
-            @Override
-			public void mousePressed(MouseEvent event) {
-            }
-
-            @Override
-			public void mouseReleased(MouseEvent event) {
-            }
-
-        });
+        this.addMouseListener(new DoodleTrayMouseListener(doodle));
     }
 }
 

@@ -47,16 +47,14 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         DoodleColor doodleColor = DoodleColor.getByLabel((String)event.getItem());
 
         if (doodleColor != null) {
-        	for(int i = 0; i < this.getItemCount(); i++) {
+        	for(int i = 2; i < this.getItemCount(); i++) {
                 MenuItem menuItem = this.getItem(i);
 
-                if(menuItem instanceof CheckboxMenuItem) {
-                	CheckboxMenuItem item = (CheckboxMenuItem) menuItem;
-	                if (item.equals(event.getSource())) {
-	                    item.setState(true);
-	                } else {
-	                    item.setState(false);
-	                }
+            	CheckboxMenuItem item = (CheckboxMenuItem) menuItem;
+                if (item.equals(event.getSource())) {
+                    item.setState(true);
+                } else {
+                    item.setState(false);
                 }
             }
 
