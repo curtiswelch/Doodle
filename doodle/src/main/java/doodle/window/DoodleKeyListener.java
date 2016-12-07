@@ -3,6 +3,7 @@ package doodle.window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import doodle.Doodle;
 import doodle.DoodleColor;
 
 public class DoodleKeyListener implements KeyListener {
@@ -26,6 +27,8 @@ public class DoodleKeyListener implements KeyListener {
                 	this.doodle.undo();
                 }
                 break;
+            case KeyEvent.VK_ESCAPE:
+            	this.doodle.hideView();
 
             default:
                 DoodleColor doodleColor = DoodleColor.getByKeyCode(event.getKeyCode());

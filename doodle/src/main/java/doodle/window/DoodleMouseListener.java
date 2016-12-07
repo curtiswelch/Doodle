@@ -11,12 +11,12 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 
 	private final double MIN_SIZE = 5.0;
 
-    private Doodle doodle;
+    private DoodleView doodle;
     private DoodleBox doodleBox;
     private int startX;
     private int startY;
 
-    public DoodleMouseListener(Doodle doodle) {
+    public DoodleMouseListener(DoodleView doodle) {
         this.doodle = doodle;
     }
 

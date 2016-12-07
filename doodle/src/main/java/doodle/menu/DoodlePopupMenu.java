@@ -1,14 +1,16 @@
-package doodle.tray;
+package doodle.menu;
 
 import java.awt.CheckboxMenuItem;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import doodle.Doodle;
 import doodle.DoodleColor;
-import doodle.window.Doodle;
+import doodle.Strings;
 
 public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     private static final long serialVersionUID = 1;
@@ -18,7 +20,13 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
     public DoodlePopupMenu(Doodle doodle) {
         this.doodle = doodle;
-        this.stop = new MenuItem("Stop Doodle!");
+        this.stop = new MenuItem(Strings.STOP_DOODLE);
+        this.stop.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				doodle.hideView();
+			}
+        });
         this.add(this.stop);
         this.addSeparator();
 
@@ -54,10 +62,6 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
             this.doodle.setDoodleColor(doodleColor);
         }
-    }
-
-    public void addStopActionListener(ActionListener listener) {
-        this.stop.addActionListener(listener);
     }
 }
 

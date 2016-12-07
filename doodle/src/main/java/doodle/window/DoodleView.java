@@ -6,24 +6,24 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JDialog;
 
+import doodle.Doodle;
 import doodle.DoodleBox;
 import doodle.DoodleColor;
-import doodle.tray.DoodlePopupMenu;
+import doodle.menu.DoodlePopupMenu;
 
-public class Doodle extends JDialog {
+public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
     private List<DoodleBox> doodles = new ArrayList<DoodleBox>();
     private DoodleColor doodleColor = DoodleColor.BLUE;
     private DoodlePopupMenu menu;
 
-    public Doodle() {
+    public DoodleView(Doodle doodle) {
         Dimension screen = this.getToolkit().getScreenSize();
         Insets insets = this.getToolkit().getScreenInsets(this.getGraphicsConfiguration());
 
@@ -35,10 +35,10 @@ public class Doodle extends JDialog {
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
 
-        this.menu = new DoodlePopupMenu(this);
+        this.menu = new DoodlePopupMenu(doodle);
         this.add(this.menu);
 
-        DoodleKeyListener keyListener = new DoodleKeyListener(this);
+        DoodleKeyListener keyListener = new DoodleKeyListener(doodle);
         this.addKeyListener(keyListener);
 
         DoodleMouseListener mouseListener = new DoodleMouseListener(this);
@@ -57,10 +57,6 @@ public class Doodle extends JDialog {
         }
 
         g.dispose();
-    }
-
-    public void setStopActionMenuListener(ActionListener al) {
-        this.menu.addStopActionListener(al);
     }
 
     public void showMenu(int x, int y) {
