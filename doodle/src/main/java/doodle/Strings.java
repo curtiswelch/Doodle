@@ -4,6 +4,7 @@ public class Strings {
 	public static final String START_DOODLE = "Start Doodle!";
 	public static final String STOP_DOODLE = "Stop Doodle!";
 	public static final String EXIT = "Exit";
+	public static final String SETTINGS = "Settings";
 
 	public static final String BLUE = "Blue";
 	public static final String RED = "Red";

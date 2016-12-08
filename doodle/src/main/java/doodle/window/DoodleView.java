@@ -93,7 +93,7 @@ public class DoodleView extends JDialog {
     }
 
     public void undo() {
-        if (this.doodles.size() > 0) {
+        if (!this.doodles.isEmpty()) {
             this.doodles.remove(this.doodles.size() - 1);
             this.repaint();
         }
@@ -106,4 +106,3 @@ public class DoodleView extends JDialog {
 		}
     }
 }
-

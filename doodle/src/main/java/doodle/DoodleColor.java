@@ -1,6 +1,7 @@
 package doodle;
 
 import java.awt.Color;
+import java.util.Optional;
 
 public enum DoodleColor {
     BLUE(Strings.BLUE, 66, new Color(43, 106, 255)),
@@ -34,24 +35,30 @@ public enum DoodleColor {
         return this.color;
     }
 
-    public static DoodleColor getByKeyCode(int keyCode) {
-    	for(DoodleColor c : DoodleColor.values()) {
-    		if(c.getKeyCode() == keyCode) {
-    			return c;
+    public static Optional<DoodleColor> getByKeyCode(int keyCode) {
+    	Optional<DoodleColor> result = Optional.empty();
+
+    	for(DoodleColor color : DoodleColor.values()) {
+    		if(color.getKeyCode() == keyCode) {
+    			result = Optional.of(color);
+    			break;
     		}
     	}
 
-    	return null;
+    	return result;
     }
 
-    public static DoodleColor getByLabel(String label) {
-        for(DoodleColor c : DoodleColor.values()) {
-        	if(c.getLabel().equals(label)) {
-        		return c;
+    public static Optional<DoodleColor> getByLabel(String label) {
+    	Optional<DoodleColor> result = Optional.empty();
+
+        for(DoodleColor color : DoodleColor.values()) {
+        	if(color.getLabel().equals(label)) {
+        		result = Optional.of(color);
+        		break;
         	}
         }
 
-        return null;
+        return result;
     }
 }
 

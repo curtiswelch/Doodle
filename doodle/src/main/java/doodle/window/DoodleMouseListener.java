@@ -3,6 +3,7 @@ package doodle.window;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Optional;
 
 import doodle.Doodle;
 import doodle.DoodleFactory;
@@ -10,46 +11,45 @@ import doodle.DoodleFactory;
 public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 
     private DoodleView doodleView;
-    private Doodle doodle;
-    private int startX;
-    private int startY;
+    private Optional<Doodle> doodle;
 
-    public DoodleMouseListener(DoodleView doodle) {
-        this.doodleView = doodle;
+    public DoodleMouseListener(DoodleView doodleView) {
+        this.doodleView = doodleView;
+        this.doodle = Optional.empty();
     }
 
 	@Override
 	public void mouseDragged(MouseEvent event) {
-        if (this.doodle == null) {
-            this.doodle = DoodleFactory.instance().create();
-            this.startX = event.getX();
-            this.startY = event.getY();
-            this.doodle.setStartingPoint(this.startX, this.startY);
-            this.doodleView.addDoodle(this.doodle);
+        if (!this.doodle.isPresent()) {
+        	Doodle newDoodle = DoodleFactory.instance().create();
+            newDoodle.setStartingPoint(event.getX(), event.getY());
+            this.doodleView.addDoodle(newDoodle);
+
+            this.doodle = Optional.of(newDoodle);
         }
 
-        this.doodle.setEndingPoint(event.getX(), event.getY());
+        this.doodle.get().setEndingPoint(event.getX(), event.getY());
 
         this.doodleView.repaint();
     }
 
 	@Override
 	public void mouseReleased(MouseEvent event) {
-        if (this.doodle != null) {
-            this.doodle.setEndingPoint(event.getX(), event.getY());
+		this.doodle.ifPresent(doodle -> {
+			doodle.setEndingPoint(event.getX(), event.getY());
 
-            if (!this.doodle.isMinimumSize()) {
-                this.doodleView.undo();
-            }
-        }
+			if(!doodle.isMinimumSize()) {
+				this.doodleView.undo();
+			}
+		});
 
         if (event.isPopupTrigger()) {
             this.doodleView.showMenu(event.getX(), event.getY());
-        } else if (this.doodle == null) {
+        } else if (!this.doodle.isPresent()) {
             this.doodleView.removeDoodleAt(event.getX(), event.getY());
         }
 
-        this.doodle = null;
+        this.doodle = Optional.empty();
     }
 
 	@Override
