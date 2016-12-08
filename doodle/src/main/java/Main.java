@@ -1,9 +1,11 @@
-package doodle;
+
 
 import javax.swing.JOptionPane;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import doodle.DoodleController;
 
 public class Main {
 	private static final Log log = LogFactory.getLog(Main.class);

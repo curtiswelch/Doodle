@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import doodle.Doodle;
-import doodle.shapes.DoodleBox;
+import doodle.DoodleFactory;
 
 public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 
@@ -21,7 +21,7 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseDragged(MouseEvent event) {
         if (this.doodle == null) {
-            this.doodle = new DoodleBox();
+            this.doodle = DoodleFactory.instance().create();
             this.startX = event.getX();
             this.startY = event.getY();
             this.doodle.setStartingPoint(this.startX, this.startY);
