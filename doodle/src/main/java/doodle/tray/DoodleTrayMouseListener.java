@@ -3,13 +3,13 @@ package doodle.tray;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import doodle.Doodle;
+import doodle.DoodleController;
 
 public class DoodleTrayMouseListener implements MouseListener {
 
-	private Doodle doodle;
+	private DoodleController doodle;
 
-	public DoodleTrayMouseListener(Doodle doodle) {
+	public DoodleTrayMouseListener(DoodleController doodle) {
 		this.doodle = doodle;
 	}
 

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class DoodleBox {
+public class DoodleBox extends Doodle {
     private Color color;
 
     private int x1;
@@ -14,7 +14,8 @@ public class DoodleBox {
 
     private Rectangle rectangle;
 
-    public void setColor(Color color) {
+    @Override
+	public void setColor(Color color) {
         this.color = color;
         this.rectangle = new Rectangle();
     }
@@ -56,7 +57,8 @@ public class DoodleBox {
         return this.rectangle;
     }
 
-    public void draw(Graphics2D g) {
+    @Override
+	public void draw(Graphics2D g) {
         Rectangle r = this.toRectangle();
 
         g.setColor(new Color(this.color.getRGB() + 838860800, true));
@@ -68,5 +70,11 @@ public class DoodleBox {
         r.setBounds(r.x - 1, r.y - 1, r.width + 2, r.height + 2);
         g.draw(r);
     }
+
+    @Override
+    public boolean hitTest(int x, int y) {
+    	return this.toRectangle().contains(x, y);
+    }
+
 }
 

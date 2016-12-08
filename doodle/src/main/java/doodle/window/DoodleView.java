@@ -7,23 +7,25 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.JDialog;
 
 import doodle.Doodle;
-import doodle.DoodleBox;
 import doodle.DoodleColor;
+import doodle.DoodleController;
 import doodle.menu.DoodlePopupMenu;
 
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
-    private List<DoodleBox> doodles = new ArrayList<DoodleBox>();
+    private List<Doodle> doodles = new ArrayList<Doodle>();
     private DoodleColor doodleColor = DoodleColor.BLUE;
     private DoodlePopupMenu menu;
 
-    public DoodleView(Doodle doodle) {
+    public DoodleView(DoodleController doodle) {
         Dimension screen = this.getToolkit().getScreenSize();
         Insets insets = this.getToolkit().getScreenInsets(this.getGraphicsConfiguration());
 
@@ -52,7 +54,7 @@ public class DoodleView extends JDialog {
 
         Graphics2D g = (Graphics2D)graphics;
 
-        for (DoodleBox doodleBox : this.doodles) {
+        for (Doodle doodleBox : this.doodles) {
             doodleBox.draw(g);
         }
 
@@ -68,33 +70,26 @@ public class DoodleView extends JDialog {
     }
 
     public void clearDoodles() {
-        this.doodles = new ArrayList<DoodleBox>();
+        this.doodles = new ArrayList<Doodle>();
         this.repaint();
     }
 
-    public void addDoodle(DoodleBox doodleBox) {
-        doodleBox.setColor(new Color(this.doodleColor.getColor().getRGB()));
-        this.doodles.add(doodleBox);
+    public void addDoodle(Doodle doodle) {
+        doodle.setColor(new Color(this.doodleColor.getColor().getRGB()));
+        this.doodles.add(doodle);
         this.repaint();
     }
 
     public void removeDoodleAt(int x, int y) {
-        DoodleBox remove = null;
 
-        for (DoodleBox doodleBox : this.doodles) {
-            if (!doodleBox.toRectangle().contains(x, y)) continue;
-            remove = doodleBox;
-        }
+        Optional<Doodle> remove = this.doodles.stream().
+        					filter(doodle -> doodle.hitTest(x, y)).
+        					max(new DoodleByIDComparator());
 
-        if (remove != null) {
-            this.doodles.remove(remove);
+        if (remove.isPresent()) {
+            this.doodles.remove(remove.get());
             this.repaint();
         }
-    }
-
-    public void removeDoodle(DoodleBox doodle) {
-        this.doodles.remove(doodle);
-        this.repaint();
     }
 
     public void undo() {
@@ -102,6 +97,13 @@ public class DoodleView extends JDialog {
             this.doodles.remove(this.doodles.size() - 1);
             this.repaint();
         }
+    }
+
+    class DoodleByIDComparator implements Comparator<Doodle> {
+		@Override
+		public int compare(Doodle d1, Doodle d2) {
+			return d2.getId() - d1.getId();
+		}
     }
 }
 

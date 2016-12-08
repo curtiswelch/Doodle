@@ -8,20 +8,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import doodle.Doodle;
 import doodle.DoodleColor;
+import doodle.DoodleController;
 import doodle.Strings;
 
 public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     private static final long serialVersionUID = 1;
 
-    private Doodle doodle;
+    private DoodleController doodle;
     private MenuItem stop;
 
-    public DoodlePopupMenu(Doodle doodle) {
+    public DoodlePopupMenu(DoodleController doodle) {
         this.doodle = doodle;
         this.stop = new MenuItem(Strings.STOP_DOODLE);
-        this.stop.addActionListener(new ActionListener(){
+        this.stop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				doodle.hideView();
@@ -47,18 +47,22 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         DoodleColor doodleColor = DoodleColor.getByLabel((String)event.getItem());
 
         if (doodleColor != null) {
-        	for(int i = 2; i < this.getItemCount(); i++) {
-                MenuItem menuItem = this.getItem(i);
-
-            	CheckboxMenuItem item = (CheckboxMenuItem) menuItem;
-                if (item.equals(event.getSource())) {
-                    item.setState(true);
-                } else {
-                    item.setState(false);
-                }
-            }
+        	resetMenuCheckBoxes((MenuItem) event.getSource());
 
             this.doodle.setDoodleColor(doodleColor);
+        }
+    }
+
+    private void resetMenuCheckBoxes(MenuItem source) {
+    	for(int i = 2; i < this.getItemCount(); i++) {
+            MenuItem menuItem = this.getItem(i);
+
+        	CheckboxMenuItem item = (CheckboxMenuItem) menuItem;
+            if (item.equals(source)) {
+                item.setState(true);
+            } else {
+                item.setState(false);
+            }
         }
     }
 }

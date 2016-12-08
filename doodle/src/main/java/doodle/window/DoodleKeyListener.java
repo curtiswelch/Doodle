@@ -3,13 +3,13 @@ package doodle.window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import doodle.Doodle;
+import doodle.DoodleController;
 import doodle.DoodleColor;
 
 public class DoodleKeyListener implements KeyListener {
-    private Doodle doodle;
+    private DoodleController doodle;
 
-    public DoodleKeyListener(Doodle doodle) {
+    public DoodleKeyListener(DoodleController doodle) {
         this.doodle = doodle;
     }
 

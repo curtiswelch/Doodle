@@ -20,7 +20,7 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
         this.doodle = doodle;
     }
 
-    @Override
+	@Override
 	public void mouseDragged(MouseEvent event) {
         if (this.doodleBox == null) {
             this.doodleBox = new DoodleBox();
@@ -34,14 +34,14 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
         this.doodle.repaint();
     }
 
-    @Override
+	@Override
 	public void mouseReleased(MouseEvent event) {
         if (this.doodleBox != null) {
             this.doodleBox.set(this.startX, this.startY, event.getX(), event.getY());
             Rectangle r = this.doodleBox.toRectangle();
 
             if (r.getWidth() < MIN_SIZE || r.getHeight() < MIN_SIZE) {
-                this.doodle.removeDoodle(this.doodleBox);
+                this.doodle.undo();
             }
         }
 
@@ -54,23 +54,23 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
         this.doodleBox = null;
     }
 
-    @Override
+	@Override
 	public void mouseMoved(MouseEvent event) {
     }
 
-    @Override
+	@Override
 	public void mouseClicked(MouseEvent event) {
     }
 
-    @Override
+	@Override
 	public void mouseEntered(MouseEvent event) {
     }
 
-    @Override
+	@Override
 	public void mouseExited(MouseEvent event) {
     }
 
-    @Override
+	@Override
 	public void mousePressed(MouseEvent event) {
     }
 }
