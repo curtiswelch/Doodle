@@ -16,10 +16,14 @@ public abstract class Doodle {
 		return id.incrementAndGet();
 	};
 
+	public abstract void setStartingPoint(int x, int y);
+	public abstract void setEndingPoint(int x, int y);
+
 	public abstract void draw(Graphics2D g);
 
 	public abstract void setColor(Color color);
 
 	public abstract boolean hitTest(int x, int y);
 
+	public abstract boolean isMinimumSize();
 }

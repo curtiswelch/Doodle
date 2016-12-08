@@ -1,10 +1,16 @@
-package doodle;
+package doodle.shapes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
+
+import doodle.Doodle;
 
 public class DoodleBox extends Doodle {
+	private static final int MIN_SIZE = 5;
+
     private Color color;
 
     private int x1;
@@ -12,26 +18,30 @@ public class DoodleBox extends Doodle {
     private int x2;
     private int y2;
 
-    private Rectangle rectangle;
+    private Rectangle rectangle = new Rectangle();
 
     @Override
 	public void setColor(Color color) {
         this.color = color;
-        this.rectangle = new Rectangle();
     }
 
     public Color getColor() {
         return this.color;
     }
 
-    public void set(int x1, int y1, int x2, int y2) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
-    }
+    @Override
+	public void setStartingPoint(int x, int y) {
+		this.x1 = x;
+		this.y1 = y;
+	}
 
-    public Rectangle toRectangle() {
+	@Override
+	public void setEndingPoint(int x, int y) {
+		this.x2 = x;
+		this.y2 = y;
+	}
+
+	public Rectangle toRectangle() {
         int x = 0;
         int y = 0;
 
@@ -64,17 +74,24 @@ public class DoodleBox extends Doodle {
         g.setColor(new Color(this.color.getRGB() + 838860800, true));
         g.fill(r);
 
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         g.setColor(this.color);
+        g.setStroke(new BasicStroke(2.5f));
         g.draw(r);
 
-        r.setBounds(r.x - 1, r.y - 1, r.width + 2, r.height + 2);
-        g.draw(r);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
     }
 
     @Override
     public boolean hitTest(int x, int y) {
     	return this.toRectangle().contains(x, y);
     }
+
+	@Override
+	public boolean isMinimumSize() {
+		return Math.abs(this.x1 - this.x2) > MIN_SIZE && Math.abs(this.y1 - this.y2) > MIN_SIZE;
+	}
 
 }
 
