@@ -1,17 +1,18 @@
 package doodle;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 public enum DoodleColor {
-    BLUE(Strings.BLUE, 66, new Color(43, 106, 255)),
-    RED(Strings.RED, 82, new Color(235, 89, 96)),
-    GREEN(Strings.GREEN, 71, new Color(51, 164, 5)),
-    PURPLE(Strings.PURPLE, 80, new Color(192, 0, 194)),
-    YELLOW(Strings.YELLOW, 89, new Color(255, 250, 141)),
-    ORANGE(Strings.ORANGE, 79, new Color(255, 194, 68)),
-    WHITE(Strings.WHITE, 87, Color.WHITE),
-    BLACK(Strings.BLACK, 75, Color.BLACK);
+    BLUE(Strings.BLUE, KeyEvent.VK_B, new Color(43, 106, 255)),
+    RED(Strings.RED, KeyEvent.VK_R, new Color(235, 89, 96)),
+    GREEN(Strings.GREEN, KeyEvent.VK_G, new Color(42, 0xce, 0x2a)),
+    PURPLE(Strings.PURPLE, KeyEvent.VK_P, new Color(192, 0, 194)),
+    YELLOW(Strings.YELLOW, KeyEvent.VK_Y, new Color(255, 255, 0)),
+    ORANGE(Strings.ORANGE, KeyEvent.VK_O, new Color(255, 194, 68)),
+    WHITE(Strings.WHITE, KeyEvent.VK_W, Color.WHITE),
+    BLACK(Strings.BLACK, KeyEvent.VK_K, Color.BLACK);
 
     private String label;
     private int keyCode;

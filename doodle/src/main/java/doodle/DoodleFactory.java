@@ -1,7 +1,10 @@
 package doodle;
 
-import doodle.shapes.DoodleBox;
-import doodle.shapes.DoodleEllipse;
+import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
+
+import doodle.shapes.DoodleRectangularShape;
 
 public class DoodleFactory {
 	private static final DoodleFactory instance;
@@ -28,11 +31,13 @@ public class DoodleFactory {
 
 		switch(this.type) {
 			case BOX:
-				inst = new DoodleBox();
+				inst = new DoodleRectangularShape(new Rectangle());
 				break;
 			case ELLIPSE:
-				inst = new DoodleEllipse();
+				inst = new DoodleRectangularShape(new Ellipse2D.Double());
 				break;
+			case ROUNDED_BOX:
+				inst = new DoodleRectangularShape(new RoundRectangle2D.Double(0, 0, 0, 0, 20, 20));
 		}
 
 		return inst;
@@ -40,6 +45,7 @@ public class DoodleFactory {
 
 	public static enum DoodleType {
 		BOX,
+		ROUNDED_BOX,
 		ELLIPSE
 	}
 }

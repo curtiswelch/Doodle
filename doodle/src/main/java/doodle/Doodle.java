@@ -6,14 +6,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Doodle {
 
-	private static final AtomicInteger id;
+	private static final AtomicInteger idGen;
 
 	static {
-		id = new AtomicInteger(0);
+		idGen = new AtomicInteger(0);
+	}
+
+	private final int id;
+
+	public Doodle() {
+		this.id = idGen.incrementAndGet();
 	}
 
 	public int getId() {
-		return id.incrementAndGet();
+		return this.id;
 	};
 
 	public abstract void setStartingPoint(int x, int y);

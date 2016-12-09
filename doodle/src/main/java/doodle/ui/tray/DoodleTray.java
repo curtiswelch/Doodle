@@ -1,4 +1,4 @@
-package doodle.tray;
+package doodle.ui.tray;
 
 import java.awt.Image;
 import java.awt.MenuItem;

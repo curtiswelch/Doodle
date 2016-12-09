@@ -1,4 +1,4 @@
-package doodle.window;
+package doodle.ui.window;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -40,6 +40,10 @@ public class DoodleKeyListener implements KeyListener {
 
             case KeyEvent.VK_2:
             	DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ELLIPSE);
+            	break;
+
+            case KeyEvent.VK_3:
+            	DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ROUNDED_BOX);
             	break;
 
             default:

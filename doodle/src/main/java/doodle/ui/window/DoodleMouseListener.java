@@ -1,4 +1,4 @@
-package doodle.window;
+package doodle.ui.window;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

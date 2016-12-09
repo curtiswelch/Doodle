@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import doodle.tray.DoodleTray;
-import doodle.window.DoodleView;
+import doodle.ui.tray.DoodleTray;
+import doodle.ui.window.DoodleView;
 
 public class DoodleController {
 	private DoodleView view;

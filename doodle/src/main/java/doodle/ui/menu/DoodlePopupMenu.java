@@ -1,4 +1,4 @@
-package doodle.menu;
+package doodle.ui.menu;
 
 import java.awt.CheckboxMenuItem;
 import java.awt.MenuItem;
@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import doodle.DoodleColor;
 import doodle.DoodleController;
@@ -48,20 +49,26 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         Optional<DoodleColor> doodleColor = DoodleColor.getByLabel((String) event.getItem());
 
         if (doodleColor.isPresent()) {
-        	resetMenuCheckBoxes((MenuItem) event.getSource());
+        	colorChanged((MenuItem) event.getSource());
 
             this.doodle.setDoodleColor(doodleColor.get());
         }
     }
 
-    private void resetMenuCheckBoxes(MenuItem source) {
+    private void resetCheckboxStates(Predicate<CheckboxMenuItem> test) {
     	for(int i = 2; i < this.getItemCount(); i++) {
-            MenuItem menuItem = this.getItem(i);
+    		CheckboxMenuItem item = (CheckboxMenuItem) this.getItem(i);
 
-        	CheckboxMenuItem item = (CheckboxMenuItem) menuItem;
+    		item.setState(test.test(item));
+    	}
+    }
 
-        	item.setState(item.equals(source));
-        }
+    private void colorChanged(MenuItem source) {
+    	resetCheckboxStates(item -> item.equals(source));
+    }
+
+    public void colorChanged(DoodleColor color) {
+    	resetCheckboxStates(item -> item.getLabel().equals(color.getLabel()));
     }
 }
 

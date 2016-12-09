@@ -1,4 +1,4 @@
-package doodle.window;
+package doodle.ui.window;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.JDialog;
 import doodle.Doodle;
 import doodle.DoodleColor;
 import doodle.DoodleController;
-import doodle.menu.DoodlePopupMenu;
+import doodle.ui.menu.DoodlePopupMenu;
 
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
@@ -67,6 +67,7 @@ public class DoodleView extends JDialog {
 
     public void setDoodleColor(DoodleColor color) {
         this.doodleColor = color;
+        this.menu.colorChanged(color);
     }
 
     public void clearDoodles() {
@@ -81,15 +82,14 @@ public class DoodleView extends JDialog {
     }
 
     public void removeDoodleAt(int x, int y) {
-
         Optional<Doodle> remove = this.doodles.stream().
         					filter(doodle -> doodle.hitTest(x, y)).
         					max(new DoodleByIDComparator());
 
-        if (remove.isPresent()) {
-            this.doodles.remove(remove.get());
-            this.repaint();
-        }
+        remove.ifPresent(doodle -> {
+        	this.doodles.remove(doodle);
+        	this.repaint();
+        });
     }
 
     public void undo() {
@@ -102,7 +102,7 @@ public class DoodleView extends JDialog {
     class DoodleByIDComparator implements Comparator<Doodle> {
 		@Override
 		public int compare(Doodle d1, Doodle d2) {
-			return d2.getId() - d1.getId();
+			return d1.getId() - d2.getId();
 		}
     }
 }
