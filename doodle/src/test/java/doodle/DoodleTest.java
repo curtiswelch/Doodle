@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.image.BufferedImage;
+
 import org.junit.Test;
 
 public class DoodleTest {
@@ -48,5 +50,21 @@ public class DoodleTest {
 		assertTrue(d.hitTest(15, 15));
 		assertFalse(d.hitTest(5, 5));
 		assertFalse(d.hitTest(25, 25));
+	}
+
+	@Test
+	public void testRender() {
+		BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+
+		Doodle d = DoodleFactory.instance().create();
+
+		d.setColor(DoodleColor.BLUE.getColor());
+		d.setStartingPoint(0, 0);
+		d.setEndingPoint(50, 50);
+		d.draw(bi.createGraphics());
+
+		int[] pixel = bi.getData().getPixel(10, 10, (int[]) null);
+
+		assertEquals(255, pixel[2]);
 	}
 }
