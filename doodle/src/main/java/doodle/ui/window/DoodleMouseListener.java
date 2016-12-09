@@ -18,17 +18,18 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
         this.doodle = Optional.empty();
     }
 
+    @Override
+    public void mousePressed(MouseEvent event) {
+    	Doodle newDoodle = DoodleFactory.instance().create();
+    	newDoodle.setStartingPoint(event.getX(), event.getY());
+    	this.doodleView.addDoodle(newDoodle);
+
+    	this.doodle = Optional.of(newDoodle);
+    }
+
 	@Override
 	public void mouseDragged(MouseEvent event) {
-        if (!this.doodle.isPresent()) {
-        	Doodle newDoodle = DoodleFactory.instance().create();
-            newDoodle.setStartingPoint(event.getX(), event.getY());
-            this.doodleView.addDoodle(newDoodle);
-
-            this.doodle = Optional.of(newDoodle);
-        }
-
-        this.doodle.get().setEndingPoint(event.getX(), event.getY());
+        this.doodle.ifPresent(doodle -> doodle.setEndingPoint(event.getX(), event.getY()));
 
         this.doodleView.repaint();
     }
@@ -66,10 +67,6 @@ public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseExited(MouseEvent event) {
-    }
-
-	@Override
-	public void mousePressed(MouseEvent event) {
     }
 }
 
