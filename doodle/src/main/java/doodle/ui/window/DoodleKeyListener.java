@@ -29,6 +29,8 @@ public class DoodleKeyListener implements KeyListener {
                 	this.doodle.undo();
                 }
                 break;
+            case KeyEvent.VK_CONTROL:
+            	break;
 
             case KeyEvent.VK_ESCAPE:
             	this.doodle.hideView();
