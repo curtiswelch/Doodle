@@ -3,6 +3,7 @@ package doodle;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public enum DoodleColor {
     BLUE(Strings.BLUE, KeyEvent.VK_B, new Color(43, 106, 255)),
@@ -37,29 +38,24 @@ public enum DoodleColor {
     }
 
     public static Optional<DoodleColor> getByKeyCode(int keyCode) {
+    	return filterColors(color -> color.getKeyCode() == keyCode);
+    }
+
+    public static Optional<DoodleColor> getByLabel(String label) {
+    	return filterColors(color -> color.getLabel().equals(label));
+    }
+
+    private static Optional<DoodleColor> filterColors(Predicate<DoodleColor> test) {
     	Optional<DoodleColor> result = Optional.empty();
 
     	for(DoodleColor color : DoodleColor.values()) {
-    		if(color.getKeyCode() == keyCode) {
+    		if(test.test(color)) {
     			result = Optional.of(color);
     			break;
     		}
     	}
 
     	return result;
-    }
-
-    public static Optional<DoodleColor> getByLabel(String label) {
-    	Optional<DoodleColor> result = Optional.empty();
-
-        for(DoodleColor color : DoodleColor.values()) {
-        	if(color.getLabel().equals(label)) {
-        		result = Optional.of(color);
-        		break;
-        	}
-        }
-
-        return result;
     }
 }
 
