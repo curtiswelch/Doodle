@@ -3,7 +3,6 @@ package doodle.ui.window;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Optional;
 
 import doodle.Doodle;
 import doodle.DoodleFactory;
@@ -11,46 +10,44 @@ import doodle.DoodleFactory;
 public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 
     private DoodleView doodleView;
-    private Optional<Doodle> doodle;
+    private Doodle doodle;
 
-    public DoodleMouseListener(DoodleView doodleView) {
+    DoodleMouseListener(DoodleView doodleView) {
         this.doodleView = doodleView;
-        this.doodle = Optional.empty();
     }
 
     @Override
     public void mousePressed(MouseEvent event) {
-    	Doodle newDoodle = DoodleFactory.instance().create();
-    	newDoodle.setStartingPoint(event.getX(), event.getY());
-    	this.doodleView.addDoodle(newDoodle);
-
-    	this.doodle = Optional.of(newDoodle);
+    	this.doodle = DoodleFactory.instance().create();
+    	this.doodle.setStartingPoint(event.getX(), event.getY());
+    	this.doodleView.addDoodle(this.doodle);
     }
 
 	@Override
 	public void mouseDragged(MouseEvent event) {
-        this.doodle.ifPresent(doodle -> doodle.setEndingPoint(event.getX(), event.getY()));
-
-        this.doodleView.repaint();
+        if(this.doodle != null) {
+            doodle.setEndingPoint(event.getX(), event.getY());
+            this.doodleView.repaint();
+        }
     }
 
 	@Override
 	public void mouseReleased(MouseEvent event) {
-		this.doodle.ifPresent(doodle -> {
+        if(this.doodle != null) {
 			doodle.setEndingPoint(event.getX(), event.getY());
 
 			if(!doodle.isMinimumSize()) {
 				this.doodleView.undo();
+				this.doodle = null;
 			}
-		});
+        }
 
         if (event.isPopupTrigger()) {
             this.doodleView.showMenu(event.getX(), event.getY());
-        } else if (!this.doodle.isPresent()) {
+        } else if (this.doodle == null){
             this.doodleView.removeDoodleAt(event.getX(), event.getY());
+            this.doodle = null;
         }
-
-        this.doodle = Optional.empty();
     }
 
 	@Override

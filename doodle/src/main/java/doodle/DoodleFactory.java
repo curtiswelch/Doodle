@@ -43,7 +43,7 @@ public class DoodleFactory {
 		return inst;
 	}
 
-	public static enum DoodleType {
+	public enum DoodleType {
 		BOX,
 		ROUNDED_BOX,
 		ELLIPSE

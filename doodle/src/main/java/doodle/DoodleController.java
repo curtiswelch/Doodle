@@ -59,7 +59,7 @@ public class DoodleController {
 		}
 	}
 
-	public void showView() {
+	private void showView() {
 		this.view.setVisible(true);
 		this.tray.setImage(stopImage);
         this.tray.setToolTip(Strings.STOP_DOODLE);
@@ -75,7 +75,7 @@ public class DoodleController {
 		private DoodleView view;
 		private DoodleTray tray;
 
-		public DoodleViewHider(DoodleView view, DoodleTray tray) {
+		DoodleViewHider(DoodleView view, DoodleTray tray) {
 			this.view = view;
 			this.tray = tray;
 		}

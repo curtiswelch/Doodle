@@ -14,13 +14,13 @@ public abstract class Doodle {
 
 	private final int id;
 
-	public Doodle() {
+	protected Doodle() {
 		this.id = idGen.incrementAndGet();
 	}
 
 	public int getId() {
 		return this.id;
-	};
+	}
 
 	public abstract void setStartingPoint(int x, int y);
 	public abstract void setEndingPoint(int x, int y);

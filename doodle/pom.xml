@@ -32,7 +32,7 @@
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>1.2</version>
-      <scope>runtime</scope>
+      <scope>compile runtime</scope>
     </dependency>
   </dependencies>
 

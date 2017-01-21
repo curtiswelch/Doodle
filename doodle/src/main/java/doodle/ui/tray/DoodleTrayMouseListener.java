@@ -9,7 +9,7 @@ public class DoodleTrayMouseListener implements MouseListener {
 
 	private DoodleController doodle;
 
-	public DoodleTrayMouseListener(DoodleController doodle) {
+	DoodleTrayMouseListener(DoodleController doodle) {
 		this.doodle = doodle;
 	}
 

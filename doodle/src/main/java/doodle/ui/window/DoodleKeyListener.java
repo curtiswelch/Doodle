@@ -11,7 +11,7 @@ import doodle.DoodleFactory;
 public class DoodleKeyListener implements KeyListener {
     private DoodleController doodle;
 
-    public DoodleKeyListener(DoodleController doodle) {
+    DoodleKeyListener(DoodleController doodle) {
         this.doodle = doodle;
     }
 
@@ -51,9 +51,7 @@ public class DoodleKeyListener implements KeyListener {
             default:
                 Optional<DoodleColor> doodleColor = DoodleColor.getByKeyCode(event.getKeyCode());
 
-                if (doodleColor.isPresent()) {
-                	this.doodle.setDoodleColor(doodleColor.get());
-                }
+                doodleColor.ifPresent(color -> this.doodle.setDoodleColor(color));
                 break;
         }
     }

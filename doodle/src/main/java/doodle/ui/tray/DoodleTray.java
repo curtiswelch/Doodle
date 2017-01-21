@@ -39,9 +39,7 @@ public class DoodleTray extends TrayIcon implements ActionListener {
         	System.exit(0);
         }
 
-        if(Strings.SETTINGS.equals(string)) {
-
-        }
+//        if(Strings.SETTINGS.equals(string)) { }
     }
 }
 

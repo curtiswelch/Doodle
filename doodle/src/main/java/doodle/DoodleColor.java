@@ -19,7 +19,7 @@ public enum DoodleColor {
     private int keyCode;
     private Color color;
 
-    private DoodleColor(String label, int keyCode, Color color) {
+    DoodleColor(String label, int keyCode, Color color) {
         this.label = label;
         this.keyCode = keyCode;
         this.color = color;

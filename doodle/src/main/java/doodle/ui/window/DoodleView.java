@@ -21,7 +21,7 @@ import doodle.ui.menu.DoodlePopupMenu;
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
-    private List<Doodle> doodles = new ArrayList<Doodle>();
+    private List<Doodle> doodles = new ArrayList<>();
     private DoodleColor doodleColor = DoodleColor.BLUE;
     private DoodlePopupMenu menu;
 
@@ -61,7 +61,7 @@ public class DoodleView extends JDialog {
         g.dispose();
     }
 
-    public void showMenu(int x, int y) {
+    void showMenu(int x, int y) {
         this.menu.show(this, x, y);
     }
 
@@ -71,17 +71,17 @@ public class DoodleView extends JDialog {
     }
 
     public void clearDoodles() {
-        this.doodles = new ArrayList<Doodle>();
+        this.doodles = new ArrayList<>();
         this.repaint();
     }
 
-    public void addDoodle(Doodle doodle) {
+    void addDoodle(Doodle doodle) {
         doodle.setColor(new Color(this.doodleColor.getColor().getRGB()));
         this.doodles.add(doodle);
         this.repaint();
     }
 
-    public void removeDoodleAt(int x, int y) {
+    void removeDoodleAt(int x, int y) {
         Optional<Doodle> remove = this.doodles.stream().
         					filter(doodle -> doodle.hitTest(x, y)).
         					max(new DoodleByIDComparator());
