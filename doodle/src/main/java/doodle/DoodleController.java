@@ -3,7 +3,11 @@ package doodle;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.SystemTray;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
@@ -13,13 +17,15 @@ import doodle.ui.tray.DoodleTray;
 import doodle.ui.window.DoodleView;
 
 public class DoodleController {
-	private DoodleView view;
-	private DoodleTray tray;
+    private DoodleView view;
+    private DoodleTray tray;
 
-	private BufferedImage startImage;
-	private BufferedImage stopImage;
+    private BufferedImage startImage;
+    private BufferedImage stopImage;
 
-	public DoodleController() throws Exception {
+    private List<KeyInputAction> actions;
+
+    public DoodleController() throws Exception {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -29,62 +35,74 @@ public class DoodleController {
             throw new IllegalStateException("Transparent Windows aren't supported :(");
         }
 
-    	this.startImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle.png"));
-		this.stopImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle_stop.png"));
+        this.actions = new ArrayList<>();
 
-		this.view = new DoodleView(this);
-		this.tray = new DoodleTray(this, this.startImage);
+        this.startImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle.png"));
+        this.stopImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle_stop.png"));
 
-		SystemTray tray = SystemTray.getSystemTray();
-		tray.add(this.tray);
-	}
+        this.view = new DoodleView(this);
+        this.tray = new DoodleTray(this, this.startImage);
 
-	public void clearDoodles() {
-		this.view.clearDoodles();
-	}
+        SystemTray tray = SystemTray.getSystemTray();
+        tray.add(this.tray);
+    }
 
-	public void undo() {
-		this.view.undo();
-	}
+    public void addKeyHandler(int keyCode, Consumer<KeyEvent> handler) {
+        this.actions.add(new KeyInputAction(keyCode, handler));
+    }
 
-	public void setDoodleColor(DoodleColor color) {
-		this.view.setDoodleColor(color);
-	}
+    public void handleKeyInput(KeyEvent event) {
+        this.actions.stream().
+            filter(a -> a.handlesKey(event.getKeyCode())).
+            forEach(a -> a.performAction(event));
+    }
 
-	public void toggleView() {
-		if(this.view.isVisible()) {
-			this.hideView();
-		} else {
-			this.showView();
-		}
-	}
+    public void clearDoodles() {
+        this.view.clearDoodles();
+    }
 
-	private void showView() {
-		this.view.setVisible(true);
-		this.tray.setImage(stopImage);
+    public void undo() {
+        this.view.undo();
+    }
+
+    public void setDoodleColor(DoodleColor color) {
+        this.view.setDoodleColor(color);
+    }
+
+    public void toggleView() {
+        if (this.view.isVisible()) {
+            this.hideView();
+        } else {
+            this.showView();
+        }
+    }
+
+    private void showView() {
+        this.view.setVisible(true);
+        this.tray.setImage(stopImage);
         this.tray.setToolTip(Strings.STOP_DOODLE);
-	}
+    }
 
-	public void hideView() {
-		this.view.clearDoodles();
+    public void hideView() {
+        this.view.clearDoodles();
 
-		SwingUtilities.invokeLater(new DoodleViewHider(this.view, this.tray));
-	}
+        SwingUtilities.invokeLater(new DoodleViewHider(this.view, this.tray));
+    }
 
-	class DoodleViewHider implements Runnable {
-		private DoodleView view;
-		private DoodleTray tray;
+    class DoodleViewHider implements Runnable {
+        private DoodleView view;
+        private DoodleTray tray;
 
-		DoodleViewHider(DoodleView view, DoodleTray tray) {
-			this.view = view;
-			this.tray = tray;
-		}
+        DoodleViewHider(DoodleView view, DoodleTray tray) {
+            this.view = view;
+            this.tray = tray;
+        }
 
-		@Override
-		public void run() {
-			this.view.setVisible(false);
-			this.tray.setImage(startImage);
-			this.tray.setToolTip(Strings.START_DOODLE);
-		}
-	}
+        @Override
+        public void run() {
+            this.view.setVisible(false);
+            this.tray.setImage(startImage);
+            this.tray.setToolTip(Strings.START_DOODLE);
+        }
+    }
 }

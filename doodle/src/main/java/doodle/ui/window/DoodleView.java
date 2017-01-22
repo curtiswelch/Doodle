@@ -40,8 +40,7 @@ public class DoodleView extends JDialog {
         this.menu = new DoodlePopupMenu(doodle);
         this.add(this.menu);
 
-        DoodleKeyListener keyListener = new DoodleKeyListener(doodle);
-        this.addKeyListener(keyListener);
+        this.addKeyListener(new DoodleKeyListener(doodle));
 
         DoodleMouseListener mouseListener = new DoodleMouseListener(this);
         this.addMouseListener(mouseListener);
@@ -52,7 +51,7 @@ public class DoodleView extends JDialog {
     public void paint(Graphics graphics) {
         super.paint(graphics);
 
-        Graphics2D g = (Graphics2D)graphics;
+        Graphics2D g = (Graphics2D) graphics;
 
         for (Doodle doodleBox : this.doodles) {
             doodleBox.draw(g);
@@ -83,12 +82,12 @@ public class DoodleView extends JDialog {
 
     void removeDoodleAt(int x, int y) {
         Optional<Doodle> remove = this.doodles.stream().
-        					filter(doodle -> doodle.hitTest(x, y)).
-        					max(new DoodleByIDComparator());
+                filter(doodle -> doodle.hitTest(x, y)).
+                max(new DoodleByIDComparator());
 
         remove.ifPresent(doodle -> {
-        	this.doodles.remove(doodle);
-        	this.repaint();
+            this.doodles.remove(doodle);
+            this.repaint();
         });
     }
 
@@ -100,9 +99,9 @@ public class DoodleView extends JDialog {
     }
 
     class DoodleByIDComparator implements Comparator<Doodle> {
-		@Override
-		public int compare(Doodle d1, Doodle d2) {
-			return d1.getId() - d2.getId();
-		}
+        @Override
+        public int compare(Doodle d1, Doodle d2) {
+            return d1.getId() - d2.getId();
+        }
     }
 }

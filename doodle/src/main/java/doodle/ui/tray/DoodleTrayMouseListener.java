@@ -7,33 +7,33 @@ import doodle.DoodleController;
 
 public class DoodleTrayMouseListener implements MouseListener {
 
-	private DoodleController doodle;
+    private DoodleController doodle;
 
-	DoodleTrayMouseListener(DoodleController doodle) {
-		this.doodle = doodle;
-	}
+    DoodleTrayMouseListener(DoodleController doodle) {
+        this.doodle = doodle;
+    }
 
-	@Override
-	public void mouseClicked(MouseEvent event) {
+    @Override
+    public void mouseClicked(MouseEvent event) {
         if (event.getButton() == MouseEvent.BUTTON1) {
-        	doodle.toggleView();
+            doodle.toggleView();
         }
-	}
+    }
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 
 }

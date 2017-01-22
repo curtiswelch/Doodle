@@ -32,11 +32,11 @@ public class DoodleTray extends TrayIcon implements ActionListener {
     }
 
     @Override
-	public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(ActionEvent event) {
         String string = event.getActionCommand();
 
-        if(Strings.EXIT.equals(string)) {
-        	System.exit(0);
+        if (Strings.EXIT.equals(string)) {
+            System.exit(0);
         }
 
 //        if(Strings.SETTINGS.equals(string)) { }

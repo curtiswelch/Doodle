@@ -26,7 +26,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         this.add(stop);
         this.addSeparator();
 
-        for(DoodleColor color : DoodleColor.values()) {
+        for (DoodleColor color : DoodleColor.values()) {
             CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
             item.addItemListener(this);
 
@@ -39,30 +39,30 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     }
 
     @Override
-	public void itemStateChanged(ItemEvent event) {
+    public void itemStateChanged(ItemEvent event) {
         Optional<DoodleColor> doodleColor = DoodleColor.getByLabel((String) event.getItem());
 
         if (doodleColor.isPresent()) {
-        	colorChanged((MenuItem) event.getSource());
+            colorChanged((MenuItem) event.getSource());
 
             this.doodle.setDoodleColor(doodleColor.get());
         }
     }
 
     private void resetCheckboxStates(Predicate<CheckboxMenuItem> test) {
-    	for(int i = 2; i < this.getItemCount(); i++) {
-    		CheckboxMenuItem item = (CheckboxMenuItem) this.getItem(i);
+        for (int i = 2; i < this.getItemCount(); i++) {
+            CheckboxMenuItem item = (CheckboxMenuItem) this.getItem(i);
 
-    		item.setState(test.test(item));
-    	}
+            item.setState(test.test(item));
+        }
     }
 
     private void colorChanged(MenuItem source) {
-    	resetCheckboxStates(item -> item.equals(source));
+        resetCheckboxStates(item -> item.equals(source));
     }
 
     public void colorChanged(DoodleColor color) {
-    	resetCheckboxStates(item -> item.getLabel().equals(color.getLabel()));
+        resetCheckboxStates(item -> item.getLabel().equals(color.getLabel()));
     }
 }
 

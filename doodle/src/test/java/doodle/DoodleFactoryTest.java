@@ -6,25 +6,25 @@ import org.junit.Test;
 
 public class DoodleFactoryTest {
 
-	@Test
-	public void testCreateDoodles() {
-		DoodleFactory factory = DoodleFactory.instance();
+    @Test
+    public void testCreateDoodles() {
+        DoodleFactory factory = DoodleFactory.instance();
 
-		Doodle doodle = factory.create();
+        Doodle doodle = factory.create();
 
-		assertNotNull(doodle);
+        assertNotNull(doodle);
 
-		factory.switchType(DoodleFactory.DoodleType.ELLIPSE);
+        factory.switchType(DoodleFactory.DoodleType.ELLIPSE);
 
-		doodle = factory.create();
+        doodle = factory.create();
 
-		assertNotNull(doodle);
+        assertNotNull(doodle);
 
-		factory.switchType(DoodleFactory.DoodleType.ROUNDED_BOX);
+        factory.switchType(DoodleFactory.DoodleType.ROUNDED_BOX);
 
-		doodle = factory.create();
+        doodle = factory.create();
 
-		assertNotNull(doodle);
-	}
+        assertNotNull(doodle);
+    }
 
 }
