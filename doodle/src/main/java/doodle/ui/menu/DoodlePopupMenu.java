@@ -9,8 +9,9 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import doodle.DoodleColor;
+import doodle.DoodleColors;
 import doodle.DoodleController;
-import doodle.Strings;
+import doodle.ui.text.Strings;
 
 public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     private static final long serialVersionUID = 1;
@@ -20,18 +21,21 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     public DoodlePopupMenu(DoodleController doodle) {
         this.doodle = doodle;
 
-        MenuItem stop = new MenuItem(Strings.STOP_DOODLE);
+        MenuItem stop = new MenuItem(Strings.getText(Strings.STOP_DOODLE_KEY));
         stop.addActionListener(e -> doodle.hideView());
 
         this.add(stop);
         this.addSeparator();
 
-        for (DoodleColor color : DoodleColor.values()) {
+        boolean firstItem = true;
+
+        for (DoodleColor color : DoodleColors.allColors()) {
             CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
             item.addItemListener(this);
 
-            if (color.ordinal() == 0) {
+            if (firstItem) {
                 item.setState(true);
+                firstItem = false;
             }
 
             this.add(item);
@@ -40,7 +44,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent event) {
-        Optional<DoodleColor> doodleColor = DoodleColor.getByLabel((String) event.getItem());
+        Optional<DoodleColor> doodleColor = DoodleColors.getByLabel((String) event.getItem());
 
         if (doodleColor.isPresent()) {
             colorChanged((MenuItem) event.getSource());

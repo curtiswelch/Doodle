@@ -7,8 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.awt.event.KeyEvent;
-import java.security.Key;
-import java.util.Optional;
 
 public class Main {
     private static final Log log = LogFactory.getLog(Main.class);
@@ -29,53 +27,15 @@ public class Main {
                 }
             });
 
-            doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> {
-                doodle.hideView();
-            });
+            doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> doodle.hideView());
 
-            doodle.addKeyHandler(KeyEvent.VK_1, event -> {
-                DoodleFactory.instance().switchType(DoodleFactory.DoodleType.BOX);
-            });
+            doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.BOX));
+            doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
+            doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ELLIPSE));
 
-            doodle.addKeyHandler(KeyEvent.VK_2, event -> {
-                DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ELLIPSE);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_3, event -> {
-                DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ROUNDED_BOX);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_B, event -> {
-                doodle.setDoodleColor(DoodleColor.BLUE);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_R, event -> {
-                doodle.setDoodleColor(DoodleColor.RED);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_G, event -> {
-                doodle.setDoodleColor(DoodleColor.GREEN);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_P, event -> {
-                doodle.setDoodleColor(DoodleColor.PURPLE);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_Y, event -> {
-                doodle.setDoodleColor(DoodleColor.YELLOW);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_O, event -> {
-                doodle.setDoodleColor(DoodleColor.ORANGE);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_W, event -> {
-                doodle.setDoodleColor(DoodleColor.WHITE);
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_K, event -> {
-                doodle.setDoodleColor(DoodleColor.BLACK);
-            });
+            for(DoodleColor color : DoodleColors.allColors()) {
+                doodle.addKeyHandler(color.getKeyCode(), event -> doodle.setDoodleColor(color));
+            }
 
         } catch (Exception e) {
             log.error(e);

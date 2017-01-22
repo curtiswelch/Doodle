@@ -1,8 +1,6 @@
 package doodle;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.SystemTray;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -13,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import doodle.ui.text.Strings;
 import doodle.ui.tray.DoodleTray;
 import doodle.ui.window.DoodleView;
 
@@ -26,25 +25,15 @@ public class DoodleController {
     private List<KeyInputAction> actions;
 
     public DoodleController() throws Exception {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-
-        if (!gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
-            throw new IllegalStateException("Transparent Windows aren't supported :(");
-        }
-
-        this.actions = new ArrayList<>();
-
         this.startImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle.png"));
         this.stopImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle_stop.png"));
+
+        this.actions = new ArrayList<>();
 
         this.view = new DoodleView(this);
         this.tray = new DoodleTray(this, this.startImage);
 
-        SystemTray tray = SystemTray.getSystemTray();
-        tray.add(this.tray);
+        SystemTray.getSystemTray().add(this.tray);
     }
 
     public void addKeyHandler(int keyCode, Consumer<KeyEvent> handler) {
@@ -80,7 +69,7 @@ public class DoodleController {
     private void showView() {
         this.view.setVisible(true);
         this.tray.setImage(stopImage);
-        this.tray.setToolTip(Strings.STOP_DOODLE);
+        this.tray.setToolTip(Strings.getText(Strings.STOP_DOODLE_KEY));
     }
 
     public void hideView() {
@@ -102,7 +91,7 @@ public class DoodleController {
         public void run() {
             this.view.setVisible(false);
             this.tray.setImage(startImage);
-            this.tray.setToolTip(Strings.START_DOODLE);
+            this.tray.setToolTip(Strings.getText(Strings.START_DOODLE_KEY));
         }
     }
 }

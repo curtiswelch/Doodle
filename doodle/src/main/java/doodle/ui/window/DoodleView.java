@@ -1,31 +1,37 @@
 package doodle.ui.window;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.JDialog;
+import javax.swing.*;
 
 import doodle.Doodle;
 import doodle.DoodleColor;
+import doodle.DoodleColors;
 import doodle.DoodleController;
 import doodle.ui.menu.DoodlePopupMenu;
+import doodle.ui.text.Strings;
 
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
     private List<Doodle> doodles = new ArrayList<>();
-    private DoodleColor doodleColor = DoodleColor.BLUE;
+    private DoodleColor doodleColor = DoodleColors.defaultColor();
     private DoodlePopupMenu menu;
 
-    public DoodleView(DoodleController doodle) {
+    public DoodleView(DoodleController doodle) throws Exception {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+
+        if (!gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
+            throw new IllegalStateException(Strings.getText(Strings.TRANSLUCENT_WINDOW_ERROR));
+        }
+
         Dimension screen = this.getToolkit().getScreenSize();
         Insets insets = this.getToolkit().getScreenInsets(this.getGraphicsConfiguration());
 
