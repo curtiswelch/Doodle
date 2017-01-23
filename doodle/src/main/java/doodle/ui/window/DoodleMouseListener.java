@@ -4,8 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import doodle.Doodle;
-import doodle.DoodleFactory;
+import doodle.ui.Doodle;
+import doodle.ui.DoodleFactory;
 
 public class DoodleMouseListener implements MouseListener, MouseMotionListener {
 

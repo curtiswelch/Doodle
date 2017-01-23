@@ -8,9 +8,9 @@ import java.util.Optional;
 
 import javax.swing.*;
 
-import doodle.Doodle;
-import doodle.DoodleColor;
-import doodle.DoodleColors;
+import doodle.ui.Doodle;
+import doodle.color.DoodleColor;
+import doodle.color.DoodleColorRegistry;
 import doodle.DoodleController;
 import doodle.ui.menu.DoodlePopupMenu;
 import doodle.ui.text.Strings;
@@ -19,7 +19,7 @@ public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
     private List<Doodle> doodles = new ArrayList<>();
-    private DoodleColor doodleColor = DoodleColors.defaultColor();
+    private DoodleColor doodleColor = DoodleColorRegistry.defaultColor();
     private DoodlePopupMenu menu;
 
     public DoodleView(DoodleController doodle) throws Exception {
@@ -29,7 +29,7 @@ public class DoodleView extends JDialog {
         GraphicsDevice gd = ge.getDefaultScreenDevice();
 
         if (!gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
-            throw new IllegalStateException(Strings.getText(Strings.TRANSLUCENT_WINDOW_ERROR));
+            throw new IllegalStateException(Strings.TRANSLUCENT_WINDOW_ERROR.value());
         }
 
         Dimension screen = this.getToolkit().getScreenSize();

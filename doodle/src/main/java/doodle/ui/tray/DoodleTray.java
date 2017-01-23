@@ -13,12 +13,12 @@ import doodle.ui.text.Strings;
 public class DoodleTray extends TrayIcon implements ActionListener {
 
     public DoodleTray(final DoodleController doodle, final Image startImage) {
-        super(startImage, Strings.getText(Strings.START_DOODLE_KEY));
+        super(startImage, Strings.START_DOODLE.value());
 
-        MenuItem settings = new MenuItem(Strings.getText(Strings.SETTINGS_KEY));
+        MenuItem settings = new MenuItem(Strings.SETTINGS.value());
         settings.addActionListener(this);
 
-        MenuItem exit = new MenuItem(Strings.getText(Strings.EXIT_KEY));
+        MenuItem exit = new MenuItem(Strings.EXIT.value());
         exit.addActionListener(this);
 
         PopupMenu menu = new PopupMenu();
@@ -35,7 +35,7 @@ public class DoodleTray extends TrayIcon implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         String string = event.getActionCommand();
 
-        if (Strings.getText(Strings.EXIT_KEY).equals(string)) {
+        if (Strings.EXIT.value().equals(string)) {
             System.exit(0);
         }
 

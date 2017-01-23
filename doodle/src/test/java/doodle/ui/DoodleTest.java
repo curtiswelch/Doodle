@@ -1,4 +1,4 @@
-package doodle;
+package doodle.ui;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import doodle.ui.Doodle;
+import doodle.ui.DoodleFactory;
 import org.junit.Test;
 
 public class DoodleTest {

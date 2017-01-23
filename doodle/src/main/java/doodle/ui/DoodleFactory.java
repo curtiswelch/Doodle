@@ -1,4 +1,4 @@
-package doodle;
+package doodle.ui;
 
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;

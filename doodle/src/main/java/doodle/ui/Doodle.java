@@ -1,4 +1,4 @@
-package doodle;
+package doodle.ui;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

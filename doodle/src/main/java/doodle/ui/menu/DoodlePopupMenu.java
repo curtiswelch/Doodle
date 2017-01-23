@@ -8,8 +8,8 @@ import java.awt.event.ItemListener;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import doodle.DoodleColor;
-import doodle.DoodleColors;
+import doodle.color.DoodleColor;
+import doodle.color.DoodleColorRegistry;
 import doodle.DoodleController;
 import doodle.ui.text.Strings;
 
@@ -21,7 +21,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     public DoodlePopupMenu(DoodleController doodle) {
         this.doodle = doodle;
 
-        MenuItem stop = new MenuItem(Strings.getText(Strings.STOP_DOODLE_KEY));
+        MenuItem stop = new MenuItem(Strings.STOP_DOODLE.value());
         stop.addActionListener(e -> doodle.hideView());
 
         this.add(stop);
@@ -29,7 +29,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
         boolean firstItem = true;
 
-        for (DoodleColor color : DoodleColors.allColors()) {
+        for (DoodleColor color : DoodleColorRegistry.allColors()) {
             CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
             item.addItemListener(this);
 
@@ -44,7 +44,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent event) {
-        Optional<DoodleColor> doodleColor = DoodleColors.getByLabel((String) event.getItem());
+        Optional<DoodleColor> doodleColor = DoodleColorRegistry.getByLabel((String) event.getItem());
 
         if (doodleColor.isPresent()) {
             colorChanged((MenuItem) event.getSource());

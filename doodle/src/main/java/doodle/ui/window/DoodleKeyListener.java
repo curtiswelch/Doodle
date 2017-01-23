@@ -2,11 +2,8 @@ package doodle.ui.window;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Optional;
 
-import doodle.DoodleColor;
 import doodle.DoodleController;
-import doodle.DoodleFactory;
 
 public class DoodleKeyListener implements KeyListener {
     private DoodleController doodle;

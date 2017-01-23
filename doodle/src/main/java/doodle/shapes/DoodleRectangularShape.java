@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RectangularShape;
 
-import doodle.Doodle;
+import doodle.ui.Doodle;
 
 public class DoodleRectangularShape extends Doodle {
     private static final int MIN_SIZE = 5;

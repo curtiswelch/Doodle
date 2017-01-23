@@ -1,7 +1,9 @@
-package doodle;
+package doodle.ui;
 
 import static org.junit.Assert.assertNotNull;
 
+import doodle.ui.Doodle;
+import doodle.ui.DoodleFactory;
 import org.junit.Test;
 
 public class DoodleFactoryTest {

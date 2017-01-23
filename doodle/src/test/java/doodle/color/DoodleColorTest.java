@@ -1,4 +1,4 @@
-package doodle;
+package doodle.color;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Optional;
 
+import doodle.color.DoodleColor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,5 +38,24 @@ public class DoodleColorTest {
     @Test
     public void hasAColor() {
         assertEquals(new Color(0, 0, 255), color.getColor());
+    }
+
+    @Test
+    public void canBeInstantiatedByAStringDefinition() {
+        DoodleColor color = new DoodleColor("Blue, B, 0, 0, 255");
+
+        assertEquals("Blue", color.getLabel());
+        assertEquals(KeyEvent.VK_B, color.getKeyCode());
+        assertEquals(new Color(0, 0 ,255), color.getColor());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doesNotAllowBadStringDefinitions() {
+        new DoodleColor("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doesNotAllowBadKeyCodesInStringDefinition() {
+        new DoodleColor("ARF, TOOT, 1, 2, 3");
     }
 }

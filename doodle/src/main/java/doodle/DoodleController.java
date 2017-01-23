@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
+import doodle.color.DoodleColor;
 import doodle.ui.text.Strings;
 import doodle.ui.tray.DoodleTray;
 import doodle.ui.window.DoodleView;
@@ -69,7 +69,7 @@ public class DoodleController {
     private void showView() {
         this.view.setVisible(true);
         this.tray.setImage(stopImage);
-        this.tray.setToolTip(Strings.getText(Strings.STOP_DOODLE_KEY));
+        this.tray.setToolTip(Strings.STOP_DOODLE.value());
     }
 
     public void hideView() {
@@ -91,7 +91,7 @@ public class DoodleController {
         public void run() {
             this.view.setVisible(false);
             this.tray.setImage(startImage);
-            this.tray.setToolTip(Strings.getText(Strings.START_DOODLE_KEY));
+            this.tray.setToolTip(Strings.START_DOODLE.value());
         }
     }
 }

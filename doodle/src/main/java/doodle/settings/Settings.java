@@ -1,4 +1,4 @@
-package doodle;
+package doodle.settings;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,21 +67,4 @@ public class Settings {
         }
     }
 
-    class Setting {
-        private String name;
-        private String value;
-
-        public Setting(String name, String value) {
-            this.name = name;
-            this.value = value;
-        }
-
-        public String name() {
-            return this.name;
-        }
-
-        public String value() {
-            return this.value;
-        }
-    }
 }
