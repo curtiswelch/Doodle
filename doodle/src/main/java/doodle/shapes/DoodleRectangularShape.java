@@ -1,12 +1,9 @@
 package doodle.shapes;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.RectangularShape;
-
 import doodle.ui.Doodle;
+
+import java.awt.*;
+import java.awt.geom.RectangularShape;
 
 public class DoodleRectangularShape extends Doodle {
     private static final int MIN_SIZE = 5;
@@ -39,7 +36,8 @@ public class DoodleRectangularShape extends Doodle {
                 this.x1 < this.x2 ? this.x1 : this.x2,
                 this.y1 < this.y2 ? this.y1 : this.y2,
                 Math.abs(this.x2 - this.x1),
-                Math.abs(this.y2 - this.y1));
+                Math.abs(this.y2 - this.y1)
+        );
     }
 
     @Override

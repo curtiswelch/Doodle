@@ -1,14 +1,11 @@
 package doodle.ui.tray;
 
-import java.awt.Image;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import doodle.DoodleController;
 import doodle.ui.text.Strings;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DoodleTray extends TrayIcon implements ActionListener {
 

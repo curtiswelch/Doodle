@@ -1,14 +1,11 @@
-
-
-import javax.swing.JOptionPane;
-
-import doodle.*;
+import doodle.DoodleController;
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 import doodle.ui.DoodleFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 public class Main {
@@ -36,7 +33,7 @@ public class Main {
             doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
             doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ELLIPSE));
 
-            for(DoodleColor color : DoodleColorRegistry.allColors()) {
+            for (DoodleColor color : DoodleColorRegistry.allColors()) {
                 doodle.addKeyHandler(color.getKeyCode(), event -> doodle.setDoodleColor(color));
             }
 

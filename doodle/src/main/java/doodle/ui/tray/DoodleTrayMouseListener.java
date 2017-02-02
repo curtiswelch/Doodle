@@ -1,9 +1,9 @@
 package doodle.ui.tray;
 
+import doodle.DoodleController;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import doodle.DoodleController;
 
 public class DoodleTrayMouseListener implements MouseListener {
 

@@ -1,19 +1,18 @@
 package doodle.ui.window;
 
+import doodle.DoodleController;
+import doodle.color.DoodleColor;
+import doodle.color.DoodleColorRegistry;
+import doodle.ui.Doodle;
+import doodle.ui.menu.DoodlePopupMenu;
+import doodle.ui.text.Strings;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-
-import javax.swing.*;
-
-import doodle.ui.Doodle;
-import doodle.color.DoodleColor;
-import doodle.color.DoodleColorRegistry;
-import doodle.DoodleController;
-import doodle.ui.menu.DoodlePopupMenu;
-import doodle.ui.text.Strings;
 
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;

@@ -1,17 +1,15 @@
 package doodle.ui.menu;
 
-import java.awt.CheckboxMenuItem;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
+import doodle.DoodleController;
+import doodle.color.DoodleColor;
+import doodle.color.DoodleColorRegistry;
+import doodle.ui.text.Strings;
+
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Optional;
 import java.util.function.Predicate;
-
-import doodle.color.DoodleColor;
-import doodle.color.DoodleColorRegistry;
-import doodle.DoodleController;
-import doodle.ui.text.Strings;
 
 public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     private static final long serialVersionUID = 1;

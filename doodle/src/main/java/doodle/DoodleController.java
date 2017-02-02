@@ -1,19 +1,18 @@
 package doodle;
 
+import doodle.color.DoodleColor;
+import doodle.ui.text.Strings;
+import doodle.ui.tray.DoodleTray;
+import doodle.ui.window.DoodleView;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
-import javax.imageio.ImageIO;
-import javax.swing.SwingUtilities;
-
-import doodle.color.DoodleColor;
-import doodle.ui.text.Strings;
-import doodle.ui.tray.DoodleTray;
-import doodle.ui.window.DoodleView;
 
 public class DoodleController {
     private DoodleView view;
@@ -42,8 +41,8 @@ public class DoodleController {
 
     public void handleKeyInput(KeyEvent event) {
         this.actions.stream().
-            filter(a -> a.handlesKey(event.getKeyCode())).
-            forEach(a -> a.performAction(event));
+                filter(a -> a.handlesKey(event.getKeyCode())).
+                forEach(a -> a.performAction(event));
     }
 
     public void clearDoodles() {

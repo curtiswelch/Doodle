@@ -1,10 +1,10 @@
 package doodle.ui;
 
-import java.awt.Rectangle;
+import doodle.shapes.DoodleRectangularShape;
+
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
-
-import doodle.shapes.DoodleRectangularShape;
 
 public class DoodleFactory {
     private static final DoodleFactory instance;
