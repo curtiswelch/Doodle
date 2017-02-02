@@ -1,6 +1,5 @@
 package doodle.ui.text;
 
-import doodle.ui.text.Strings;
 import org.junit.Test;
 
 import java.util.Locale;

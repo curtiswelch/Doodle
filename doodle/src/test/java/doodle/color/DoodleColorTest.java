@@ -1,15 +1,13 @@
 package doodle.color;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import doodle.color.DoodleColor;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class DoodleColorTest {
 
@@ -46,7 +44,7 @@ public class DoodleColorTest {
 
         assertEquals("Blue", color.getLabel());
         assertEquals(KeyEvent.VK_B, color.getKeyCode());
-        assertEquals(new Color(0, 0 ,255), color.getColor());
+        assertEquals(new Color(0, 0, 255), color.getColor());
     }
 
     @Test(expected = IllegalArgumentException.class)

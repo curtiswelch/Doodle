@@ -24,28 +24,26 @@ public class Settings {
     private List<Setting> settings;
 
     private Settings() {
-        this.settings = new ArrayList<>();
-        this.load();
+        this.reload();
     }
 
     public List<Setting> settings() {
         return Collections.unmodifiableList(this.settings);
     }
 
-    private void load() {
+    public void reload() {
+        this.settings = new ArrayList<>();
         try {
             InputStream properties = null;
 
             String userHome = System.getProperty("user.home");
 
             log.info("User Home: " + userHome);
-            if (userHome != null) {
-                File userSettings = new File(userHome + File.separatorChar + "doodle.properties");
+            File userSettings = new File(userHome + File.separatorChar + "doodle.properties");
 
-                if (userSettings.exists()) {
-                    log.info("Using settings from user");
-                    properties = new FileInputStream(userSettings);
-                }
+            if (userSettings.exists()) {
+                log.info("Using settings from user");
+                properties = new FileInputStream(userSettings);
             }
 
             if (properties == null) {
@@ -57,6 +55,12 @@ public class Settings {
 
             String line;
             while ((line = reader.readLine()) != null) {
+                line = line.trim();
+
+                if (line.startsWith("#")) {
+                    continue;
+                }
+
                 String[] property = line.split("=");
 
                 if (property.length == 2) {
