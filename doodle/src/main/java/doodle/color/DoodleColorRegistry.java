@@ -31,16 +31,9 @@ public class DoodleColorRegistry {
     }
 
     private static Optional<DoodleColor> filterColors(Predicate<DoodleColor> test) {
-        Optional<DoodleColor> result = Optional.empty();
-
-        for (DoodleColor color : DoodleColorRegistry.colors) {
-            if (test.test(color)) {
-                result = Optional.of(color);
-                break;
-            }
-        }
-
-        return result;
+        return DoodleColorRegistry.colors.stream()
+                .filter(test)
+                .findFirst();
     }
 
     public static List<DoodleColor> allColors() {
