@@ -22,11 +22,7 @@ public class DoodleColor {
     }
 
     public DoodleColor(String definition) {
-        String[] definitionParts = definition.split(",");
-
-        if (definitionParts.length != 5) {
-            throw new IllegalArgumentException("Invalid DoodleColor String definition: '" + definition + "'");
-        }
+        String[] definitionParts = splitDefinitionPartss(definition);
 
         this.label = definitionParts[NAME];
         this.color = getColorFromParts(definitionParts);
@@ -43,6 +39,16 @@ public class DoodleColor {
 
     public Color getColor() {
         return this.color;
+    }
+
+    private String[] splitDefinitionPartss(String definition) {
+        String[] parts = definition.split(",");
+
+        if (parts.length != 5) {
+            throw new IllegalArgumentException("Invalid DoodleColor String definition: '" + definition + "'");
+        }
+
+        return parts;
     }
 
     private Color getColorFromParts(String[] definitionParts) {
