@@ -16,31 +16,47 @@ public class Main {
         try {
             DoodleController doodle = new DoodleController();
 
-            doodle.addKeyHandler(KeyEvent.VK_C, event -> {
-                if (event.isControlDown()) {
-                    doodle.clearDoodles();
-                }
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_Z, event -> {
-                if (event.isControlDown()) {
-                    doodle.undo();
-                }
-            });
-
-            doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> doodle.hideView());
-
-            doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.BOX));
-            doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
-            doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ELLIPSE));
-
-            for (DoodleColor color : DoodleColorRegistry.allColors()) {
-                doodle.addKeyHandler(color.getKeyCode(), event -> doodle.setDoodleColor(color));
-            }
+            addClearDoodles(doodle);
+            addUndoDoodle(doodle);
+            addHideDoodle(doodle);
+            addShapes(doodle);
+            addColors(doodle);
 
         } catch (Exception e) {
             log.error(e);
             JOptionPane.showMessageDialog(null, "Something bad happened :(");
+        }
+    }
+
+    private static void addClearDoodles(DoodleController doodle) {
+        doodle.addKeyHandler(KeyEvent.VK_C, event -> {
+            if (event.isControlDown()) {
+                doodle.clearDoodles();
+            }
+        });
+    }
+
+    private static void addUndoDoodle(DoodleController doodle) {
+        doodle.addKeyHandler(KeyEvent.VK_Z, event -> {
+            if (event.isControlDown()) {
+                doodle.undo();
+            }
+        });
+    }
+
+    private static void addHideDoodle(DoodleController doodle) {
+        doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> doodle.hideView());
+    }
+
+    private static void addShapes(DoodleController doodle) {
+        doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.BOX));
+        doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
+        doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ELLIPSE));
+    }
+
+    private static void addColors(DoodleController doodle) {
+        for (DoodleColor color : DoodleColorRegistry.allColors()) {
+            doodle.addKeyHandler(color.getKeyCode(), event -> doodle.setDoodleColor(color));
         }
     }
 }
