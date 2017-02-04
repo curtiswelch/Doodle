@@ -25,19 +25,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         this.add(stop);
         this.addSeparator();
 
-        boolean firstItem = true;
-
-        for (DoodleColor color : DoodleColorRegistry.allColors()) {
-            CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
-            item.addItemListener(this);
-
-            if (firstItem) {
-                item.setState(true);
-                firstItem = false;
-            }
-
-            this.add(item);
-        }
+        addColors();
     }
 
     @Override
@@ -49,6 +37,19 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
             this.doodle.setDoodleColor(doodleColor.get());
         }
+    }
+
+    private void addColors() {
+        DoodleColorRegistry.allColors().forEach(color -> {
+            CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
+            item.addItemListener(this);
+
+            if (2 == this.getItemCount()) {
+                item.setState(true);
+            }
+
+            this.add(item);
+        });
     }
 
     private void resetCheckboxStates(Predicate<CheckboxMenuItem> test) {
