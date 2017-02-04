@@ -23,14 +23,7 @@ public class DoodleView extends JDialog {
     private DoodlePopupMenu menu;
 
     public DoodleView(DoodleController doodle) throws Exception {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-
-        if (!gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
-            throw new IllegalStateException(Strings.TRANSLUCENT_WINDOW_ERROR.value());
-        }
+        setupUI();
 
         Dimension screen = this.getToolkit().getScreenSize();
         Insets insets = this.getToolkit().getScreenInsets(this.getGraphicsConfiguration());
@@ -52,6 +45,17 @@ public class DoodleView extends JDialog {
 
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
+    }
+
+    private void setupUI() throws Exception {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+
+        if (!gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
+            throw new IllegalStateException(Strings.TRANSLUCENT_WINDOW_ERROR.value());
+        }
     }
 
     @Override
