@@ -32,11 +32,11 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     public void itemStateChanged(ItemEvent event) {
         Optional<DoodleColor> doodleColor = DoodleColorRegistry.getByLabel((String) event.getItem());
 
-        if (doodleColor.isPresent()) {
+        doodleColor.ifPresent(color -> {
             colorChanged((MenuItem) event.getSource());
 
             this.doodle.setDoodleColor(doodleColor.get());
-        }
+        });
     }
 
     private void addColors() {
