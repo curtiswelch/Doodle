@@ -30,12 +30,7 @@ public class DoodleColor {
 
         this.label = definitionParts[NAME];
         this.color = getColorFromParts(definitionParts);
-
-        try {
-            this.keyCode = getKeyCodeFromParts(definitionParts);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid DoodleColor KeyCode definition: '" + definition + "'");
-        }
+        this.keyCode = getKeyCodeFromParts(definitionParts);
     }
 
     public String getLabel() {
@@ -58,9 +53,15 @@ public class DoodleColor {
         );
     }
 
-    private int getKeyCodeFromParts(String[] definitionParts) throws Exception {
-        Field field = KeyEvent.class.getField("VK_" + definitionParts[KEY].trim().toUpperCase());
-        return field.getInt(null);
+    private int getKeyCodeFromParts(String[] definitionParts) throws IllegalArgumentException {
+        String keyValue = definitionParts[KEY];
+
+        try {
+            Field field = KeyEvent.class.getField("VK_" + keyValue.trim().toUpperCase());
+            return field.getInt(null);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid DoodleColor KeyCode definition: '" + keyValue + "'");
+        }
     }
 
 }

@@ -33,8 +33,8 @@ public class DoodleRectangularShape extends Doodle {
         this.y2 = y;
 
         this.shape.setFrame(
-                this.x1 < this.x2 ? this.x1 : this.x2,
-                this.y1 < this.y2 ? this.y1 : this.y2,
+                Math.min(this.x1, this.x2),
+                Math.min(this.y1, this.y2),
                 Math.abs(this.x2 - this.x1),
                 Math.abs(this.y2 - this.y1)
         );
