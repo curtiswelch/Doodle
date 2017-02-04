@@ -17,19 +17,16 @@ public class Mouse extends AbstractMouseListener {
 
     @Override
     public void mousePressed(MouseEvent event) {
-        System.out.println(state.getClass().getSimpleName() + " mousePressed");
         this.state.mousePressed(this, event);
     }
 
     @Override
     public void mouseReleased(MouseEvent event) {
-        System.out.println(state.getClass().getSimpleName() + " mouseReleased");
         this.state.mouseReleased(this, event);
     }
 
     @Override
     public void mouseDragged(MouseEvent event) {
-        System.out.println(state.getClass().getSimpleName() + " mouseDragged");
         this.state.mouseDragged(this, event);
     }
 
