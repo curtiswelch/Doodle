@@ -55,7 +55,7 @@ public class Main {
     }
 
     private static void addColors(DoodleController doodle) {
-        for (DoodleColor color : DoodleColorRegistry.allColors()) {
+        for (DoodleColor color : DoodleColorRegistry.INSTANCE.allColors()) {
             doodle.addKeyHandler(color.getKeyCode(), event -> doodle.setDoodleColor(color));
         }
     }

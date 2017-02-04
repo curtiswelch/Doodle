@@ -19,7 +19,7 @@ public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
     private List<Doodle> doodles = new ArrayList<>();
-    private DoodleColor doodleColor = DoodleColorRegistry.defaultColor();
+    private DoodleColor doodleColor = DoodleColorRegistry.INSTANCE.defaultColor();
     private DoodlePopupMenu menu;
 
     public DoodleView(DoodleController doodle) throws Exception {

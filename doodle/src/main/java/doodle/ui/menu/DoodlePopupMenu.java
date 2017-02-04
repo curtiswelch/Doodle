@@ -30,7 +30,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent event) {
-        Optional<DoodleColor> doodleColor = DoodleColorRegistry.getByLabel((String) event.getItem());
+        Optional<DoodleColor> doodleColor = DoodleColorRegistry.INSTANCE.getByLabel((String) event.getItem());
 
         doodleColor.ifPresent(color -> {
             colorChanged((MenuItem) event.getSource());
@@ -40,7 +40,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     }
 
     private void addColors() {
-        DoodleColorRegistry.allColors().forEach(color -> {
+        DoodleColorRegistry.INSTANCE.allColors().forEach(color -> {
             CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
             item.addItemListener(this);
 
