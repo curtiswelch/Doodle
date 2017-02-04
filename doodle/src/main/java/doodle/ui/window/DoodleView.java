@@ -5,6 +5,7 @@ import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 import doodle.ui.Doodle;
 import doodle.ui.menu.DoodlePopupMenu;
+import doodle.ui.mouse.Mouse;
 import doodle.ui.text.Strings;
 
 import javax.swing.*;
@@ -47,9 +48,10 @@ public class DoodleView extends JDialog {
 
         this.addKeyListener(new DoodleKeyListener(doodle));
 
-        DoodleMouseListener mouseListener = new DoodleMouseListener(this);
-        this.addMouseListener(mouseListener);
-        this.addMouseMotionListener(mouseListener);
+        Mouse mouse = new Mouse(this);
+
+        this.addMouseListener(mouse);
+        this.addMouseMotionListener(mouse);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class DoodleView extends JDialog {
         g.dispose();
     }
 
-    void showMenu(int x, int y) {
+    public void showMenu(int x, int y) {
         this.menu.show(this, x, y);
     }
 
@@ -79,13 +81,17 @@ public class DoodleView extends JDialog {
         this.repaint();
     }
 
-    void addDoodle(Doodle doodle) {
+    public void addDoodle(Doodle doodle) {
         doodle.setColor(new Color(this.doodleColor.getColor().getRGB()));
         this.doodles.add(doodle);
         this.repaint();
     }
 
-    void removeDoodleAt(int x, int y) {
+    public void removeDoodle(Doodle doodle) {
+        this.doodles.remove(doodle);
+    }
+
+    public void removeDoodleAt(int x, int y) {
         Optional<Doodle> remove = this.doodles.stream().
                 filter(doodle -> doodle.hitTest(x, y)).
                 max(new DoodleByIDComparator());

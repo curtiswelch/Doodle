@@ -1,4 +1,5 @@
-import doodle.DoodleController;
+package doodle;
+
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 import doodle.ui.DoodleFactory;
@@ -29,9 +30,9 @@ public class Main {
 
             doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> doodle.hideView());
 
-            doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.BOX));
-            doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
-            doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.instance().switchType(DoodleFactory.DoodleType.ELLIPSE));
+            doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.BOX));
+            doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
+            doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ELLIPSE));
 
             for (DoodleColor color : DoodleColorRegistry.allColors()) {
                 doodle.addKeyHandler(color.getKeyCode(), event -> doodle.setDoodleColor(color));

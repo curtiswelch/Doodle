@@ -8,7 +8,7 @@ public class DoodleFactoryTest {
 
     @Test
     public void testCreateDoodles() {
-        DoodleFactory factory = DoodleFactory.instance();
+        DoodleFactory factory = DoodleFactory.INSTANCE;
 
         Doodle doodle = factory.create();
 

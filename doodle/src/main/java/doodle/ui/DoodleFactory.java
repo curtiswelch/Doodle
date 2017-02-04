@@ -6,21 +6,10 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 
-public class DoodleFactory {
-    private static final DoodleFactory instance;
-
-    static {
-        instance = new DoodleFactory();
-    }
-
-    public static DoodleFactory instance() {
-        return instance;
-    }
+public enum DoodleFactory {
+    INSTANCE;
 
     private DoodleType type = DoodleType.BOX;
-
-    private DoodleFactory() {
-    }
 
     public void switchType(DoodleType type) {
         this.type = type;

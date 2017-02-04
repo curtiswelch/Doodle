@@ -32,7 +32,13 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
-            <scope>compile runtime</scope>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava-reactive-streams</artifactId>
+            <version>1.2.1</version>
         </dependency>
     </dependencies>
 
@@ -54,7 +60,7 @@
                                 <manifest>
                                     <addClasspath>true</addClasspath>
                                     <classpathPrefix>lib/</classpathPrefix>
-                                    <mainClass>doodle.doodle.Main</mainClass>
+                                    <mainClass>doodle.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
