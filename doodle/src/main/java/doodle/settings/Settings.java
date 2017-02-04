@@ -34,41 +34,63 @@ public class Settings {
     public void reload() {
         this.settings = new ArrayList<>();
         try {
-            InputStream properties = null;
-
-            String userHome = System.getProperty("user.home");
-
-            log.info("User Home: " + userHome);
-            File userSettings = new File(userHome + File.separatorChar + "doodle.properties");
-
-            if (userSettings.exists()) {
-                log.info("Using settings from user");
-                properties = new FileInputStream(userSettings);
-            }
-
-            if (properties == null) {
-                log.info("Using default settings");
-                properties = ClassLoader.getSystemResourceAsStream("doodle.properties");
-            }
+            InputStream properties = propertiesInputStream();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(properties));
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-
-                if (line.startsWith("#")) {
-                    continue;
-                }
-
-                String[] property = line.split("=");
-
-                if (property.length == 2) {
-                    this.settings.add(new Setting(property[0].trim(), property[1].trim()));
-                }
-            }
+            processSettings(reader);
         } catch (IOException e) {
         }
+    }
+
+    private void processSettings(BufferedReader reader) throws IOException {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            line = line.trim();
+
+            processLine(line);
+        }
+    }
+
+    private void processLine(String line) {
+        if (!line.startsWith("#")) {
+            processProperty(line);
+        }
+    }
+
+    private void processProperty(String line) {
+        String[] property = line.split("=");
+
+        if (property.length == 2) {
+            this.settings.add(new Setting(property[0].trim(), property[1].trim()));
+        }
+    }
+
+    private InputStream propertiesInputStream() throws IOException {
+        InputStream properties = userSettings();
+
+        if (properties == null) {
+            log.info("Using default settings");
+            properties = ClassLoader.getSystemResourceAsStream("doodle.properties");
+        }
+
+        return properties;
+    }
+
+    private InputStream userSettings() throws IOException {
+        InputStream properties = null;
+
+        String userHome = System.getProperty("user.home");
+
+        log.info("User Home: " + userHome);
+        File userSettings = new File(userHome + File.separatorChar + "doodle.properties");
+
+        if (userSettings.exists()) {
+            log.info("Using settings from user");
+            properties = new FileInputStream(userSettings);
+        }
+
+        return properties;
     }
 
 }
