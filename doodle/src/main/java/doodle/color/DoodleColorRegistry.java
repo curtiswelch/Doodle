@@ -1,6 +1,5 @@
 package doodle.color;
 
-import doodle.settings.Setting;
 import doodle.settings.Settings;
 
 import java.util.ArrayList;
@@ -19,11 +18,11 @@ public class DoodleColorRegistry {
     public static void loadSettings() {
         DoodleColorRegistry.colors = new ArrayList<>();
 
-        for (Setting setting : Settings.instance().settings()) {
+        Settings.instance().settings().forEach(setting -> {
             if (setting.name().startsWith("color.")) {
                 DoodleColorRegistry.colors.add(new DoodleColor(setting.value()));
             }
-        }
+        });
     }
 
     public static Optional<DoodleColor> getByLabel(String label) {
