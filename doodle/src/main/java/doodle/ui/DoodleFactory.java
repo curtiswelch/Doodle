@@ -5,6 +5,7 @@ import doodle.shapes.DoodleRectangularShape;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
+import java.util.function.Supplier;
 
 public enum DoodleFactory {
     INSTANCE;
@@ -16,25 +17,22 @@ public enum DoodleFactory {
     }
 
     public Doodle create() {
-        Doodle inst = null;
-
-        switch (this.type) {
-            case BOX:
-                inst = new DoodleRectangularShape(new Rectangle());
-                break;
-            case ELLIPSE:
-                inst = new DoodleRectangularShape(new Ellipse2D.Double());
-                break;
-            case ROUNDED_BOX:
-                inst = new DoodleRectangularShape(new RoundRectangle2D.Double(0, 0, 0, 0, 20, 20));
-        }
-
-        return inst;
+        return this.type.create();
     }
 
     public enum DoodleType {
-        BOX,
-        ROUNDED_BOX,
-        ELLIPSE
+        BOX(() -> new DoodleRectangularShape(new Rectangle())),
+        ROUNDED_BOX(() -> new DoodleRectangularShape(new Ellipse2D.Double())),
+        ELLIPSE(() -> new DoodleRectangularShape(new RoundRectangle2D.Double(0, 0, 0, 0, 20, 20)));
+
+        private Supplier<Doodle> supplier;
+
+        DoodleType(Supplier<Doodle> supplier) {
+            this.supplier = supplier;
+        }
+
+        public Doodle create() {
+            return this.supplier.get();
+        }
     }
 }
