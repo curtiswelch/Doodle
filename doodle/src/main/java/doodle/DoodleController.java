@@ -1,6 +1,7 @@
 package doodle;
 
 import doodle.color.DoodleColor;
+import doodle.ui.DoodleCollection;
 import doodle.ui.text.Strings;
 import doodle.ui.tray.DoodleTray;
 import doodle.ui.window.DoodleView;
@@ -46,11 +47,13 @@ public class DoodleController {
     }
 
     public void clearDoodles() {
-        this.view.clearDoodles();
+        DoodleCollection.INSTANCE.clearDoodles();
+        this.view.repaint();
     }
 
     public void undo() {
-        this.view.undo();
+        DoodleCollection.INSTANCE.undo();
+        this.view.repaint();
     }
 
     public void setDoodleColor(DoodleColor color) {
@@ -72,7 +75,7 @@ public class DoodleController {
     }
 
     public void hideView() {
-        this.view.clearDoodles();
+        DoodleCollection.INSTANCE.clearDoodles();
 
         SwingUtilities.invokeLater(new DoodleViewHider(this.view, this.tray));
     }

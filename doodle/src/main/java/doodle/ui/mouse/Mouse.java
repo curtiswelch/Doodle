@@ -1,6 +1,7 @@
 package doodle.ui.mouse;
 
 import doodle.ui.Doodle;
+import doodle.ui.DoodleCollection;
 import doodle.ui.window.DoodleView;
 
 import java.awt.event.MouseEvent;
@@ -31,17 +32,17 @@ public class Mouse extends AbstractMouseListener {
     }
 
     void addDoodle(Doodle doodle) {
-        this.view.addDoodle(doodle);
+        DoodleCollection.INSTANCE.addDoodle(doodle);
         this.updateView();
     }
 
     void removeDoodle(Doodle doodle) {
-        this.view.removeDoodle(doodle);
+        DoodleCollection.INSTANCE.removeDoodle(doodle);
         this.updateView();
     }
 
     void removeDoodleAt(int x, int y) {
-        this.view.removeDoodleAt(x, y);
+        DoodleCollection.INSTANCE.removeDoodleAt(x, y);
         this.updateView();
     }
 

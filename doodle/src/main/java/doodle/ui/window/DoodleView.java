@@ -4,6 +4,7 @@ import doodle.DoodleController;
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 import doodle.ui.Doodle;
+import doodle.ui.DoodleCollection;
 import doodle.ui.menu.DoodlePopupMenu;
 import doodle.ui.mouse.Mouse;
 import doodle.ui.text.Strings;
@@ -18,8 +19,6 @@ import java.util.Optional;
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
-    private List<Doodle> doodles = new ArrayList<>();
-    private DoodleColor doodleColor = DoodleColorRegistry.INSTANCE.defaultColor();
     private DoodlePopupMenu menu;
 
     public DoodleView(DoodleController doodle) throws Exception {
@@ -64,7 +63,7 @@ public class DoodleView extends JDialog {
 
         Graphics2D g = (Graphics2D) graphics;
 
-        for (Doodle doodleBox : this.doodles) {
+        for (Doodle doodleBox : DoodleCollection.INSTANCE.doodles()) {
             doodleBox.draw(g);
         }
 
@@ -76,47 +75,10 @@ public class DoodleView extends JDialog {
     }
 
     public void setDoodleColor(DoodleColor color) {
-        this.doodleColor = color;
+        DoodleCollection.INSTANCE.setDoodleColor(color);
         this.menu.colorChanged(color);
     }
 
-    public void clearDoodles() {
-        this.doodles = new ArrayList<>();
-        this.repaint();
-    }
 
-    public void addDoodle(Doodle doodle) {
-        doodle.setColor(new Color(this.doodleColor.getColor().getRGB()));
-        this.doodles.add(doodle);
-        this.repaint();
-    }
 
-    public void removeDoodle(Doodle doodle) {
-        this.doodles.remove(doodle);
-    }
-
-    public void removeDoodleAt(int x, int y) {
-        Optional<Doodle> remove = this.doodles.stream().
-                filter(doodle -> doodle.hitTest(x, y)).
-                max(new DoodleByIDComparator());
-
-        remove.ifPresent(doodle -> {
-            this.doodles.remove(doodle);
-            this.repaint();
-        });
-    }
-
-    public void undo() {
-        if (!this.doodles.isEmpty()) {
-            this.doodles.remove(this.doodles.size() - 1);
-            this.repaint();
-        }
-    }
-
-    class DoodleByIDComparator implements Comparator<Doodle> {
-        @Override
-        public int compare(Doodle d1, Doodle d2) {
-            return d1.getId() - d2.getId();
-        }
-    }
 }
