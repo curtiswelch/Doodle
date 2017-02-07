@@ -1,8 +1,6 @@
 package doodle.ui.window;
 
 import doodle.DoodleController;
-import doodle.color.DoodleColor;
-import doodle.color.DoodleColorRegistry;
 import doodle.ui.Doodle;
 import doodle.ui.DoodleCollection;
 import doodle.ui.menu.DoodlePopupMenu;
@@ -11,10 +9,6 @@ import doodle.ui.text.Strings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
 
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
@@ -73,12 +67,5 @@ public class DoodleView extends JDialog {
     public void showMenu(int x, int y) {
         this.menu.show(this, x, y);
     }
-
-    public void setDoodleColor(DoodleColor color) {
-        DoodleCollection.INSTANCE.setDoodleColor(color);
-        this.menu.colorChanged(color);
-    }
-
-
 
 }

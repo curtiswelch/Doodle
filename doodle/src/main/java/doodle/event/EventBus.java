@@ -9,16 +9,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EventBus {
+public enum EventBus {
+    INSTANCE;
+
     private static final List<Listener> EMPTY = new ArrayList<>();
 
     private Map<Class<?>, List<Listener>> listenerMap;
 
-    public EventBus() {
+    EventBus() {
         listenerMap = new HashMap<>();
     }
 
-    public void subscribe(Object object) {
+    public static void subscribe(Object object) {
+        INSTANCE.doSubscribe(object);
+    }
+
+    public static void post(Object event) {
+        INSTANCE.doPost(event);
+    }
+
+    private void doSubscribe(Object object) {
         if (object == null) {
             throw new NullPointerException();
         }
@@ -26,7 +36,7 @@ public class EventBus {
         findSubscriptionMethods(object);
     }
 
-    public void post(Object event) {
+    private void doPost(Object event) {
         List<Listener> listeners = listenerMap.getOrDefault(event.getClass(), EMPTY);
 
         listeners.forEach(listener -> listener.invoke(event));

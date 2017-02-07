@@ -1,9 +1,7 @@
 package doodle.ui;
 
-import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,14 +11,9 @@ public enum DoodleCollection {
     INSTANCE;
 
     private List<Doodle> doodles = new ArrayList<>();
-    private DoodleColor doodleColor = DoodleColorRegistry.INSTANCE.defaultColor();
 
     public List<Doodle> doodles() {
         return this.doodles;
-    }
-
-    public void setDoodleColor(DoodleColor color) {
-        this.doodleColor = color;
     }
 
     public void clearDoodles() {
@@ -28,7 +21,7 @@ public enum DoodleCollection {
     }
 
     public void addDoodle(Doodle doodle) {
-        doodle.setColor(new Color(this.doodleColor.getColor().getRGB()));
+        doodle.setColor(DoodleColorRegistry.INSTANCE.currentColor().getColor());
         this.doodles.add(doodle);
     }
 

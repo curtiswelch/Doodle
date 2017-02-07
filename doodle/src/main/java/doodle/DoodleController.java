@@ -1,6 +1,5 @@
 package doodle;
 
-import doodle.color.DoodleColor;
 import doodle.ui.DoodleCollection;
 import doodle.ui.text.Strings;
 import doodle.ui.tray.DoodleTray;
@@ -54,10 +53,6 @@ public class DoodleController {
     public void undo() {
         DoodleCollection.INSTANCE.undo();
         this.view.repaint();
-    }
-
-    public void setDoodleColor(DoodleColor color) {
-        this.view.setDoodleColor(color);
     }
 
     public void toggleView() {

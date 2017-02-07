@@ -1,5 +1,7 @@
 package doodle.color;
 
+import doodle.event.ColorChanged;
+import doodle.event.EventBus;
 import doodle.settings.Settings;
 
 import java.util.ArrayList;
@@ -11,38 +13,46 @@ import java.util.function.Predicate;
 public enum DoodleColorRegistry {
     INSTANCE;
 
-    private static List<DoodleColor> colors;
+    private List<DoodleColor> colors;
+
+    private DoodleColor currentColor;
 
     DoodleColorRegistry() {
         loadSettings();
+        this.currentColor = this.colors.get(0);
     }
 
-    private void loadSettings() {
-        DoodleColorRegistry.colors = new ArrayList<>();
+    public DoodleColor currentColor() {
+        return this.currentColor;
+    }
 
-        Settings.instance().settings().forEach(setting -> {
-            if (setting.name().startsWith("color.")) {
-                DoodleColorRegistry.colors.add(new DoodleColor(setting.value()));
-            }
-        });
+    public void currentColor(DoodleColor color) {
+        this.currentColor = color;
+        EventBus.post(new ColorChanged(color));
     }
 
     public Optional<DoodleColor> getByLabel(String label) {
         return filterColors(color -> color.getLabel().equals(label));
     }
 
+    public List<DoodleColor> allColors() {
+        return Collections.unmodifiableList(this.colors);
+    }
+
+    private void loadSettings() {
+        this.colors = new ArrayList<>();
+
+        Settings.instance().settings().forEach(setting -> {
+            if (setting.name().startsWith("color.")) {
+                this.colors.add(new DoodleColor(setting.value()));
+            }
+        });
+    }
+
     private Optional<DoodleColor> filterColors(Predicate<DoodleColor> test) {
-        return DoodleColorRegistry.colors.stream()
+        return this.colors.stream()
                 .filter(test)
                 .findFirst();
-    }
-
-    public List<DoodleColor> allColors() {
-        return Collections.unmodifiableList(DoodleColorRegistry.colors);
-    }
-
-    public DoodleColor defaultColor() {
-        return DoodleColorRegistry.colors.get(0);
     }
 
 }

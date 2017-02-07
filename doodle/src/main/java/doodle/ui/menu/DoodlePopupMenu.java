@@ -3,6 +3,9 @@ package doodle.ui.menu;
 import doodle.DoodleController;
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
+import doodle.event.ColorChanged;
+import doodle.event.EventBus;
+import doodle.event.Subscribe;
 import doodle.ui.text.Strings;
 
 import java.awt.*;
@@ -26,6 +29,13 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         this.addSeparator();
 
         addColors();
+
+        EventBus.subscribe(this);
+    }
+
+    @Subscribe
+    public void onDoodleColorChanged(ColorChanged colorChanged) {
+        resetCheckboxStates(item -> item.getLabel().equals(colorChanged.newColor().getLabel()));
     }
 
     @Override
@@ -35,7 +45,7 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         doodleColor.ifPresent(color -> {
             colorChanged((MenuItem) event.getSource());
 
-            this.doodle.setDoodleColor(doodleColor.get());
+            DoodleColorRegistry.INSTANCE.currentColor(color);
         });
     }
 
@@ -64,8 +74,5 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         resetCheckboxStates(item -> item.equals(source));
     }
 
-    public void colorChanged(DoodleColor color) {
-        resetCheckboxStates(item -> item.getLabel().equals(color.getLabel()));
-    }
 }
 
