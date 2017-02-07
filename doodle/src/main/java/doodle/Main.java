@@ -2,6 +2,7 @@ package doodle;
 
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
+import doodle.ui.DoodleCollection;
 import doodle.ui.DoodleFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,7 +32,7 @@ public class Main {
     private static void addClearDoodles(DoodleController doodle) {
         doodle.addKeyHandler(KeyEvent.VK_C, event -> {
             if (event.isControlDown()) {
-                doodle.clearDoodles();
+                DoodleCollection.INSTANCE.clearDoodles();
             }
         });
     }

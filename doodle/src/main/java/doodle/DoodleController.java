@@ -45,11 +45,6 @@ public class DoodleController {
                 forEach(a -> a.performAction(event));
     }
 
-    public void clearDoodles() {
-        DoodleCollection.INSTANCE.clearDoodles();
-        this.view.repaint();
-    }
-
     public void undo() {
         DoodleCollection.INSTANCE.undo();
         this.view.repaint();

@@ -1,6 +1,9 @@
 package doodle.ui.window;
 
 import doodle.DoodleController;
+import doodle.event.DoodlesCleared;
+import doodle.event.EventBus;
+import doodle.event.Subscribe;
 import doodle.ui.Doodle;
 import doodle.ui.DoodleCollection;
 import doodle.ui.menu.DoodlePopupMenu;
@@ -38,6 +41,8 @@ public class DoodleView extends JDialog {
 
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
+
+        EventBus.subscribe(this);
     }
 
     private void setupUI() throws Exception {
@@ -49,6 +54,11 @@ public class DoodleView extends JDialog {
         if (!gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
             throw new IllegalStateException(Strings.TRANSLUCENT_WINDOW_ERROR.value());
         }
+    }
+
+    @Subscribe
+    public void onDoodlesCleared(DoodlesCleared event) {
+        this.repaint();
     }
 
     @Override

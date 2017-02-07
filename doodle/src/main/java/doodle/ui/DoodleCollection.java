@@ -1,6 +1,8 @@
 package doodle.ui;
 
 import doodle.color.DoodleColorRegistry;
+import doodle.event.DoodlesCleared;
+import doodle.event.EventBus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +20,7 @@ public enum DoodleCollection {
 
     public void clearDoodles() {
         this.doodles = new ArrayList<>();
+        EventBus.post(new DoodlesCleared());
     }
 
     public void addDoodle(Doodle doodle) {
