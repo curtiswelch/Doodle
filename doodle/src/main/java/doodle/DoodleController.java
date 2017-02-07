@@ -45,11 +45,6 @@ public class DoodleController {
                 forEach(a -> a.performAction(event));
     }
 
-    public void undo() {
-        DoodleCollection.INSTANCE.undo();
-        this.view.repaint();
-    }
-
     public void toggleView() {
         if (this.view.isVisible()) {
             this.hideView();

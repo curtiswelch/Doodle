@@ -1,7 +1,7 @@
 package doodle.ui.window;
 
 import doodle.DoodleController;
-import doodle.event.DoodlesCleared;
+import doodle.event.DoodlesChanged;
 import doodle.event.EventBus;
 import doodle.event.Subscribe;
 import doodle.ui.Doodle;
@@ -57,7 +57,7 @@ public class DoodleView extends JDialog {
     }
 
     @Subscribe
-    public void onDoodlesCleared(DoodlesCleared event) {
+    public void onDoodlesChanged(DoodlesChanged event) {
         this.repaint();
     }
 

@@ -40,7 +40,7 @@ public class Main {
     private static void addUndoDoodle(DoodleController doodle) {
         doodle.addKeyHandler(KeyEvent.VK_Z, event -> {
             if (event.isControlDown()) {
-                doodle.undo();
+                DoodleCollection.INSTANCE.undo();
             }
         });
     }

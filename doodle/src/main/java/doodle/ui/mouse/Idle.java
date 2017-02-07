@@ -1,5 +1,7 @@
 package doodle.ui.mouse;
 
+import doodle.ui.DoodleCollection;
+
 import java.awt.event.MouseEvent;
 
 public enum Idle implements MouseState {
@@ -18,7 +20,7 @@ public enum Idle implements MouseState {
         if (event.isPopupTrigger()) {
             mouse.showMenu(event.getX(), event.getY());
         } else {
-            mouse.removeDoodleAt(event.getX(), event.getY());
+            DoodleCollection.INSTANCE.removeDoodleAt(event.getX(), event.getY());
         }
     }
 
