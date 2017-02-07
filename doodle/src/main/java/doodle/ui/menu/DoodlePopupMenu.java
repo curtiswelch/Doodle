@@ -5,8 +5,10 @@ import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 import doodle.event.ColorChanged;
 import doodle.event.EventBus;
+import doodle.event.MenuRequested;
 import doodle.event.Subscribe;
 import doodle.ui.text.Strings;
+import doodle.ui.window.DoodleView;
 
 import java.awt.*;
 import java.awt.event.ItemEvent;
@@ -17,10 +19,10 @@ import java.util.function.Predicate;
 public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     private static final long serialVersionUID = 1;
 
-    private DoodleController doodle;
+    private DoodleView view;
 
-    public DoodlePopupMenu(DoodleController doodle) {
-        this.doodle = doodle;
+    public DoodlePopupMenu(DoodleController doodle, DoodleView view) {
+        this.view = view;
 
         MenuItem stop = new MenuItem(Strings.STOP_DOODLE.value());
         stop.addActionListener(e -> doodle.hideView());
@@ -31,6 +33,11 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
         addColors();
 
         EventBus.subscribe(this);
+    }
+
+    @Subscribe
+    public void onMenuRequested(MenuRequested menuRequested) {
+        this.show(this.view, menuRequested.x(), menuRequested.y());
     }
 
     @Subscribe

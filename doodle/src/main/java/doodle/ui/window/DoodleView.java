@@ -32,12 +32,12 @@ public class DoodleView extends JDialog {
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
 
-        this.menu = new DoodlePopupMenu(doodle);
+        this.menu = new DoodlePopupMenu(doodle, this);
         this.add(this.menu);
 
         this.addKeyListener(new DoodleKeyListener(doodle));
 
-        Mouse mouse = new Mouse(this);
+        Mouse mouse = new Mouse();
 
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);

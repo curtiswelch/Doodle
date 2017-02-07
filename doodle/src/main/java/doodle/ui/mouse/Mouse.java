@@ -1,17 +1,12 @@
 package doodle.ui.mouse;
 
-import doodle.ui.window.DoodleView;
-
 import java.awt.event.MouseEvent;
 
 public class Mouse extends AbstractMouseListener {
     private MouseState state;
 
-    private DoodleView view;
-
-    public Mouse(DoodleView view) {
+    public Mouse() {
         this.state = Idle.INSTANCE;
-        this.view = view;
     }
 
     @Override
@@ -27,10 +22,6 @@ public class Mouse extends AbstractMouseListener {
     @Override
     public void mouseDragged(MouseEvent event) {
         this.state.mouseDragged(this, event);
-    }
-
-    void showMenu(int x, int y) {
-        this.view.showMenu(x, y);
     }
 
     void switchState(MouseState state, MouseEvent event) {
