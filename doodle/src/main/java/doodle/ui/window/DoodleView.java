@@ -32,7 +32,7 @@ public class DoodleView extends JDialog {
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
 
-        this.menu = new DoodlePopupMenu(doodle, this);
+        this.menu = new DoodlePopupMenu(this);
         this.add(this.menu);
 
         this.addKeyListener(new DoodleKeyListener(doodle));
@@ -72,10 +72,6 @@ public class DoodleView extends JDialog {
         }
 
         g.dispose();
-    }
-
-    public void showMenu(int x, int y) {
-        this.menu.show(this, x, y);
     }
 
 }

@@ -2,6 +2,8 @@ package doodle;
 
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
+import doodle.event.EventBus;
+import doodle.event.HideViewRequested;
 import doodle.ui.DoodleCollection;
 import doodle.ui.DoodleFactory;
 import org.apache.commons.logging.Log;
@@ -46,7 +48,7 @@ public class Main {
     }
 
     private static void addHideDoodle(DoodleController doodle) {
-        doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> doodle.hideView());
+        doodle.addKeyHandler(KeyEvent.VK_ESCAPE, event -> EventBus.post(new HideViewRequested()));
     }
 
     private static void addShapes(DoodleController doodle) {

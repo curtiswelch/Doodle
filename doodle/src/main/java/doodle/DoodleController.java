@@ -1,5 +1,6 @@
 package doodle;
 
+import doodle.event.*;
 import doodle.ui.DoodleCollection;
 import doodle.ui.text.Strings;
 import doodle.ui.tray.DoodleTray;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,21 +20,20 @@ public class DoodleController {
     private DoodleView view;
     private DoodleTray tray;
 
-    private BufferedImage startImage;
-    private BufferedImage stopImage;
-
     private List<KeyInputAction> actions;
 
     public DoodleController() throws Exception {
-        this.startImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle.png"));
-        this.stopImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle_stop.png"));
+        BufferedImage startImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle.png"));
+        BufferedImage stopImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle_stop.png"));
 
         this.actions = new ArrayList<>();
 
         this.view = new DoodleView(this);
-        this.tray = new DoodleTray(this, this.startImage);
+        this.tray = new DoodleTray(this, startImage, stopImage);
 
         SystemTray.getSystemTray().add(this.tray);
+
+        EventBus.subscribe(this);
     }
 
     public void addKeyHandler(int keyCode, Consumer<KeyEvent> handler) {
@@ -45,40 +46,28 @@ public class DoodleController {
                 forEach(a -> a.performAction(event));
     }
 
-    public void toggleView() {
-        if (this.view.isVisible()) {
-            this.hideView();
-        } else {
-            this.showView();
-        }
-    }
-
-    private void showView() {
+    @Subscribe
+    public void onShowViewRequested(ShowViewRequested showViewRequested) {
         this.view.setVisible(true);
-        this.tray.setImage(stopImage);
-        this.tray.setToolTip(Strings.STOP_DOODLE.value());
     }
 
-    public void hideView() {
+    @Subscribe
+    public void onHideViewRequested(HideViewRequested hideViewRequested) {
         DoodleCollection.INSTANCE.clearDoodles();
 
-        SwingUtilities.invokeLater(new DoodleViewHider(this.view, this.tray));
+        SwingUtilities.invokeLater(new DoodleViewHider(this.view));
     }
 
     class DoodleViewHider implements Runnable {
         private DoodleView view;
-        private DoodleTray tray;
 
-        DoodleViewHider(DoodleView view, DoodleTray tray) {
+        DoodleViewHider(DoodleView view) {
             this.view = view;
-            this.tray = tray;
         }
 
         @Override
         public void run() {
             this.view.setVisible(false);
-            this.tray.setImage(startImage);
-            this.tray.setToolTip(Strings.START_DOODLE.value());
         }
     }
 }

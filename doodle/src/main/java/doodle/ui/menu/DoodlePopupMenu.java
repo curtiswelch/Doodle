@@ -3,10 +3,7 @@ package doodle.ui.menu;
 import doodle.DoodleController;
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
-import doodle.event.ColorChanged;
-import doodle.event.EventBus;
-import doodle.event.MenuRequested;
-import doodle.event.Subscribe;
+import doodle.event.*;
 import doodle.ui.text.Strings;
 import doodle.ui.window.DoodleView;
 
@@ -21,11 +18,11 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
     private DoodleView view;
 
-    public DoodlePopupMenu(DoodleController doodle, DoodleView view) {
+    public DoodlePopupMenu(DoodleView view) {
         this.view = view;
 
         MenuItem stop = new MenuItem(Strings.STOP_DOODLE.value());
-        stop.addActionListener(e -> doodle.hideView());
+        stop.addActionListener(e -> EventBus.post(new HideViewRequested()));
 
         this.add(stop);
         this.addSeparator();
