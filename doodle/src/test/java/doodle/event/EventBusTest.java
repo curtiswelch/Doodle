@@ -40,6 +40,17 @@ public class EventBusTest {
         EventBus.subscribe(null);
     }
 
+    @Test
+    public void worksWithPrivateMethods() {
+        PrivateMethodHandler handler = new PrivateMethodHandler();
+
+        EventBus.subscribe(handler);
+
+        EventBus.post(new Boolean(true));
+
+        assertEquals(true, handler.value());
+    }
+
     class TestHandler {
         private boolean value = false;
 
@@ -56,6 +67,19 @@ public class EventBusTest {
     class BadTestHandler {
         @Subscribe
         public void handle() {
+        }
+    }
+
+    class PrivateMethodHandler {
+        private boolean value = false;
+
+        @Subscribe
+        private void handle(Boolean value) {
+            this.value = value;
+        }
+
+        public boolean value() {
+            return this.value;
         }
     }
 }

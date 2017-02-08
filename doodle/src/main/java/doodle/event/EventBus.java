@@ -43,7 +43,7 @@ public enum EventBus {
     }
 
     private void findSubscriptionMethods(Object object) {
-        Method[] methods = object.getClass().getMethods();
+        Method[] methods = object.getClass().getDeclaredMethods();
 
         for (Method method : methods) {
             checkMethodForSubscription(object, method);
@@ -82,6 +82,10 @@ public enum EventBus {
         Listener(Object instance, Method method) {
             this.instance = instance;
             this.method = method;
+
+            if(!method.isAccessible()) {
+                this.method.setAccessible(true);
+            }
         }
 
         void invoke(Object value) {
