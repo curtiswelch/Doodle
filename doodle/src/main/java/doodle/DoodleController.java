@@ -29,7 +29,7 @@ public class DoodleController {
         this.actions = new ArrayList<>();
 
         this.view = new DoodleView(this);
-        this.tray = new DoodleTray(this, startImage, stopImage);
+        this.tray = new DoodleTray(startImage, stopImage);
 
         SystemTray.getSystemTray().add(this.tray);
 

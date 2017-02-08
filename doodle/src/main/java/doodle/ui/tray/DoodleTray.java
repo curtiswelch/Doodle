@@ -1,38 +1,27 @@
 package doodle.ui.tray;
 
-import doodle.DoodleController;
-import doodle.event.*;
+import doodle.event.EventBus;
+import doodle.event.HideViewRequested;
+import doodle.event.ShowViewRequested;
+import doodle.event.Subscribe;
 import doodle.ui.text.Strings;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class DoodleTray extends TrayIcon implements ActionListener, MouseListener {
+public class DoodleTray extends TrayIcon implements MouseListener {
 
     private Image startImage;
     private Image stopImage;
 
-    public DoodleTray(final DoodleController doodle, final Image startImage, Image stopImage) {
+    public DoodleTray(final Image startImage, Image stopImage) {
         super(startImage, Strings.START_DOODLE.value());
 
         this.startImage = startImage;
         this.stopImage = stopImage;
 
-        MenuItem settings = new MenuItem(Strings.SETTINGS.value());
-        settings.addActionListener(this);
-
-        MenuItem exit = new MenuItem(Strings.EXIT.value());
-        exit.addActionListener(this);
-
-        PopupMenu menu = new PopupMenu();
-        menu.add(settings);
-        menu.addSeparator();
-        menu.add(exit);
-
-        this.setPopupMenu(menu);
+        this.setPopupMenu(new DoodleTrayMenu());
 
         this.addMouseListener(this);
 
@@ -51,17 +40,8 @@ public class DoodleTray extends TrayIcon implements ActionListener, MouseListene
         this.setImage(this.stopImage);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        String string = event.getActionCommand();
-
-        if (Strings.EXIT.value().equals(string)) {
-            System.exit(0);
-        }
-    }
-
     private void postViewEvent() {
-        if(this.getImage().equals(this.startImage)) {
+        if (this.getImage().equals(this.startImage)) {
             EventBus.post(new ShowViewRequested());
         } else {
             EventBus.post(new HideViewRequested());
