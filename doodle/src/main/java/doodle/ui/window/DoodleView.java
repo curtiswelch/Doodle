@@ -57,7 +57,7 @@ public class DoodleView extends JDialog {
     }
 
     @Subscribe
-    public void onDoodlesChanged(DoodlesChanged event) {
+    private void onDoodlesChanged(DoodlesChanged event) {
         this.repaint();
     }
 

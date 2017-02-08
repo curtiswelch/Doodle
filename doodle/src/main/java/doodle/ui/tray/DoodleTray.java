@@ -40,13 +40,13 @@ public class DoodleTray extends TrayIcon implements ActionListener, MouseListene
     }
 
     @Subscribe
-    public void onHideViewRequested(HideViewRequested hideViewRequested) {
+    private void onHideViewRequested(HideViewRequested hideViewRequested) {
         this.setToolTip(Strings.START_DOODLE.value());
         this.setImage(this.startImage);
     }
 
     @Subscribe
-    public void onShowViewRequested(ShowViewRequested showViewRequested) {
+    private void onShowViewRequested(ShowViewRequested showViewRequested) {
         this.setToolTip(Strings.STOP_DOODLE.value());
         this.setImage(this.stopImage);
     }

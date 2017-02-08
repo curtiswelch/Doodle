@@ -47,12 +47,12 @@ public class DoodleController {
     }
 
     @Subscribe
-    public void onShowViewRequested(ShowViewRequested showViewRequested) {
+    private void onShowViewRequested(ShowViewRequested showViewRequested) {
         this.view.setVisible(true);
     }
 
     @Subscribe
-    public void onHideViewRequested(HideViewRequested hideViewRequested) {
+    private void onHideViewRequested(HideViewRequested hideViewRequested) {
         DoodleCollection.INSTANCE.clearDoodles();
 
         SwingUtilities.invokeLater(new DoodleViewHider(this.view));

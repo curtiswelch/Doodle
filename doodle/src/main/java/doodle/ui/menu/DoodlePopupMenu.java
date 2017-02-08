@@ -32,12 +32,12 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
     }
 
     @Subscribe
-    public void onMenuRequested(MenuRequested menuRequested) {
+    private void onMenuRequested(MenuRequested menuRequested) {
         this.show(this.view, menuRequested.x(), menuRequested.y());
     }
 
     @Subscribe
-    public void onDoodleColorChanged(ColorChanged colorChanged) {
+    private void onDoodleColorChanged(ColorChanged colorChanged) {
         resetCheckboxStates(item -> item.getLabel().equals(colorChanged.newColor().getLabel()));
     }
 
