@@ -17,18 +17,18 @@ public class DoodleColorRegistryTest {
 
     @Test
     public void loadsColorsFromSettings() {
-        assertTrue(DoodleColorRegistry.INSTANCE.allColors().size() > 0);
+        assertTrue(DoodleColorRegistry.allColors().size() > 0);
     }
 
     @Test
     public void canFindByLabel() {
-        Optional<DoodleColor> color = DoodleColorRegistry.INSTANCE.getByLabel("Red");
+        Optional<DoodleColor> color = DoodleColorRegistry.getByLabel("Red");
 
         assertTrue(color.isPresent());
     }
 
     @Test
     public void hasDefaultColor() {
-        assertNotNull(DoodleColorRegistry.INSTANCE.defaultColor());
+        assertNotNull(DoodleColorRegistry.currentColor());
     }
 }

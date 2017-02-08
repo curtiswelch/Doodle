@@ -38,7 +38,7 @@ public enum DoodleCollection {
         this.newDoodle = DoodleFactory.INSTANCE.create();
         this.newDoodle.setStartingPoint(x, y);
 
-        this.newDoodle.setColor(DoodleColorRegistry.INSTANCE.currentColor().getColor());
+        this.newDoodle.setColor(DoodleColorRegistry.currentColor().getColor());
 
         postDoodlesChanged();
     }
@@ -61,12 +61,6 @@ public enum DoodleCollection {
         postDoodlesChanged();
     }
 
-    private void removeDoodle(Doodle doodle) {
-        this.doodles.remove(doodle);
-
-        postDoodlesChanged();
-    }
-
     public void removeDoodleAt(int x, int y) {
         Optional<Doodle> remove = this.doodles.stream().
                 filter(doodle -> doodle.hitTest(x, y)).
@@ -77,8 +71,15 @@ public enum DoodleCollection {
 
     public void undo() {
         if (!this.doodles.isEmpty()) {
-            this.doodles.remove(this.doodles.size() - 1);
+            int lastDoodleIndex = this.doodles.size() - 1;
+            Doodle lastDoodle = this.doodles.get(lastDoodleIndex);
+
+            removeDoodle(lastDoodle);
         }
+    }
+
+    private void removeDoodle(Doodle doodle) {
+        this.doodles.remove(doodle);
 
         postDoodlesChanged();
     }

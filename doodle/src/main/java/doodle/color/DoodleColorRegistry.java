@@ -22,27 +22,27 @@ public enum DoodleColorRegistry {
         this.currentColor = this.colors.get(0);
     }
 
-    public DoodleColor currentColor() {
-        return this.currentColor;
+    public static DoodleColor currentColor() {
+        return INSTANCE.currentColor;
     }
 
-    public void currentColor(DoodleColor color) {
-        this.currentColor = color;
+    public static void currentColor(DoodleColor color) {
+        INSTANCE.currentColor = color;
         EventBus.post(new ColorChanged(color));
     }
 
-    public Optional<DoodleColor> getByLabel(String label) {
-        return filterColors(color -> color.getLabel().equals(label));
+    public static Optional<DoodleColor> getByLabel(String label) {
+        return INSTANCE.filterColors(color -> color.getLabel().equals(label));
     }
 
-    public List<DoodleColor> allColors() {
-        return Collections.unmodifiableList(this.colors);
+    public static List<DoodleColor> allColors() {
+        return Collections.unmodifiableList(INSTANCE.colors);
     }
 
     private void loadSettings() {
         this.colors = new ArrayList<>();
 
-        Settings.instance().settings().forEach(setting -> {
+        Settings.settings().forEach(setting -> {
             if (setting.name().startsWith("color.")) {
                 this.colors.add(new DoodleColor(setting.value()));
             }

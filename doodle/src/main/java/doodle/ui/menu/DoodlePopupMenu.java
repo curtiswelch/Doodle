@@ -1,6 +1,5 @@
 package doodle.ui.menu;
 
-import doodle.DoodleController;
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
 import doodle.event.*;
@@ -44,17 +43,17 @@ public class DoodlePopupMenu extends PopupMenu implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent event) {
-        Optional<DoodleColor> doodleColor = DoodleColorRegistry.INSTANCE.getByLabel((String) event.getItem());
+        Optional<DoodleColor> doodleColor = DoodleColorRegistry.getByLabel((String) event.getItem());
 
         doodleColor.ifPresent(color -> {
             colorChanged((MenuItem) event.getSource());
 
-            DoodleColorRegistry.INSTANCE.currentColor(color);
+            DoodleColorRegistry.currentColor(color);
         });
     }
 
     private void addColors() {
-        DoodleColorRegistry.INSTANCE.allColors().forEach(color -> {
+        DoodleColorRegistry.allColors().forEach(color -> {
             CheckboxMenuItem item = new CheckboxMenuItem(color.getLabel());
             item.addItemListener(this);
 

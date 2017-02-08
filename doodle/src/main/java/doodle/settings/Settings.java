@@ -8,30 +8,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Settings {
-    private static final Log log = LogFactory.getLog(Settings.class);
+public enum Settings {
+    INSTANCE;
 
-    private static Settings instance;
-
-    static {
-        Settings.instance = new Settings();
-    }
-
-    public static Settings instance() {
-        return instance;
-    }
+    private final Log log = LogFactory.getLog(Settings.class);
 
     private List<Setting> settings;
 
-    private Settings() {
-        this.reload();
+    Settings() {
+        this.doReload();
     }
 
-    public List<Setting> settings() {
-        return Collections.unmodifiableList(this.settings);
+    public static List<Setting> settings() {
+        return Collections.unmodifiableList(INSTANCE.settings);
     }
 
-    public void reload() {
+    public static void reload() {
+        INSTANCE.doReload();
+    }
+
+    private void doReload() {
         this.settings = new ArrayList<>();
         try {
             InputStream properties = propertiesInputStream();

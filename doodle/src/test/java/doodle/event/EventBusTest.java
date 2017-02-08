@@ -6,20 +6,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class EventBusTest {
-    private EventBus eventBus;
-
-    @Before
-    public void newEventBus() {
-        eventBus = new EventBus();
-    }
-
     @Test
     public void respondsToCorrectEvent() {
         TestHandler handler = new TestHandler();
 
-        eventBus.subscribe(handler);
+        EventBus.subscribe(handler);
 
-        eventBus.post(new Boolean(true));
+        EventBus.post(new Boolean(true));
 
         assertEquals(true, handler.value());
     }
@@ -28,9 +21,9 @@ public class EventBusTest {
     public void doesNotRespondToWrongEvent() {
         TestHandler handler = new TestHandler();
 
-        eventBus.subscribe(handler);
+        EventBus.subscribe(handler);
 
-        eventBus.post(new Integer(1));
+        EventBus.post(new Integer(1));
 
         assertEquals(false, handler.value());
     }
@@ -39,12 +32,12 @@ public class EventBusTest {
     public void hatesHandlersWithoutParameters() {
         BadTestHandler badTestHandler = new BadTestHandler();
 
-        eventBus.subscribe(badTestHandler);
+        EventBus.subscribe(badTestHandler);
     }
 
     @Test(expected = NullPointerException.class)
     public void hatesNullHandlers() {
-        eventBus.subscribe(null);
+        EventBus.subscribe(null);
     }
 
     class TestHandler {

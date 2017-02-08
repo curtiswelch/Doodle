@@ -16,25 +16,25 @@ public class SettingsTest {
         URL url = ClassLoader.getSystemResource("userhome");
         System.setProperty("user.home", url.getPath());
 
-        Settings.instance().reload();
+        Settings.reload();
 
-        assertNotNull(Settings.instance().settings());
+        assertNotNull(Settings.settings());
 
-        assertNotNull(Settings.instance().settings().get(0));
+        assertNotNull(Settings.settings().get(0));
 
-        assertEquals("color.bland", Settings.instance().settings().get(0).name());
+        assertEquals("color.bland", Settings.settings().get(0).name());
 
         System.setProperty("user.home", originalUserHome);
     }
 
     @Test
     public void shouldFallBackToDefaultPreferences() {
-        Settings.instance().reload();
+        Settings.reload();
 
-        assertNotNull(Settings.instance().settings());
+        assertNotNull(Settings.settings());
 
-        assertNotNull(Settings.instance().settings().get(0));
+        assertNotNull(Settings.settings().get(0));
 
-        assertEquals("color.blue", Settings.instance().settings().get(0).name());
+        assertEquals("color.blue", Settings.settings().get(0).name());
     }
 }

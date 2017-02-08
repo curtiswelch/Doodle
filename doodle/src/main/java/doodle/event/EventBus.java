@@ -79,12 +79,12 @@ public enum EventBus {
         private Object instance;
         private Method method;
 
-        public Listener(Object instance, Method method) {
+        Listener(Object instance, Method method) {
             this.instance = instance;
             this.method = method;
         }
 
-        public void invoke(Object value) {
+        void invoke(Object value) {
             try {
                 method.invoke(instance, value);
             } catch (IllegalAccessException | InvocationTargetException e) {
