@@ -3,10 +3,10 @@ package doodle.color;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.awt.*;
 import java.util.Optional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class DoodleColorRegistryTest {
 
@@ -30,5 +30,14 @@ public class DoodleColorRegistryTest {
     @Test
     public void hasDefaultColor() {
         assertNotNull(DoodleColorRegistry.currentColor());
+    }
+
+    @Test
+    public void canSetDefaultColor() {
+        DoodleColor doodleColor = new DoodleColor("Poo", 1, Color.WHITE);
+
+        DoodleColorRegistry.currentColor(doodleColor);
+
+        assertEquals(doodleColor, DoodleColorRegistry.currentColor());
     }
 }
