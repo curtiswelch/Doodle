@@ -1,11 +1,6 @@
 package doodle.ui.mouse;
 
-import doodle.DoodleController;
-import doodle.event.DoodlesChanged;
-import doodle.event.EventBus;
-import doodle.ui.Doodle;
 import doodle.ui.DoodleCollection;
-import doodle.ui.DoodleFactory;
 
 import java.awt.event.MouseEvent;
 

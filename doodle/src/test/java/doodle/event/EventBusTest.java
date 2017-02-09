@@ -1,6 +1,5 @@
 package doodle.event;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -51,16 +50,18 @@ public class EventBusTest {
         assertEquals(true, handler.value());
     }
 
-    class TestHandler {
-        private boolean value = false;
+    abstract class CheckedHandler {
+        boolean value = false;
 
+        boolean value() {
+            return this.value;
+        }
+    }
+
+    class TestHandler extends CheckedHandler {
         @Subscribe
         public void handle(Boolean value) {
             this.value = value;
-        }
-
-        public boolean value() {
-            return this.value;
         }
     }
 
@@ -70,16 +71,10 @@ public class EventBusTest {
         }
     }
 
-    class PrivateMethodHandler {
-        private boolean value = false;
-
+    class PrivateMethodHandler extends CheckedHandler {
         @Subscribe
         private void handle(Boolean value) {
             this.value = value;
-        }
-
-        public boolean value() {
-            return this.value;
         }
     }
 }
