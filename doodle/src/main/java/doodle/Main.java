@@ -52,9 +52,9 @@ public class Main {
     }
 
     private static void addShapes(DoodleController doodle) {
-        doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.BOX));
-        doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
-        doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.INSTANCE.switchType(DoodleFactory.DoodleType.ELLIPSE));
+        doodle.addKeyHandler(KeyEvent.VK_1, event -> DoodleFactory.switchType(DoodleFactory.DoodleType.BOX));
+        doodle.addKeyHandler(KeyEvent.VK_2, event -> DoodleFactory.switchType(DoodleFactory.DoodleType.ROUNDED_BOX));
+        doodle.addKeyHandler(KeyEvent.VK_3, event -> DoodleFactory.switchType(DoodleFactory.DoodleType.ELLIPSE));
     }
 
     private static void addColors(DoodleController doodle) {

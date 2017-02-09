@@ -11,16 +11,16 @@ public class DoodleTest {
 
     @Test
     public void testCreateDoodle() {
-        Doodle d1 = DoodleFactory.INSTANCE.create();
+        Doodle d1 = DoodleFactory.create();
 
-        Doodle d2 = DoodleFactory.INSTANCE.create();
+        Doodle d2 = DoodleFactory.create();
 
         assertEquals(d1.getId() + 1, d2.getId());
     }
 
     @Test
     public void testDoodleBigEnough() {
-        Doodle d = DoodleFactory.INSTANCE.create();
+        Doodle d = DoodleFactory.create();
 
         d.setStartingPoint(0, 0);
         d.setEndingPoint(5, 5);
@@ -41,7 +41,7 @@ public class DoodleTest {
 
     @Test
     public void testDoodleHitTest() {
-        Doodle d = DoodleFactory.INSTANCE.create();
+        Doodle d = DoodleFactory.create();
 
         d.setStartingPoint(10, 10);
         d.setEndingPoint(20, 20);
@@ -55,7 +55,7 @@ public class DoodleTest {
     public void testRender() {
         BufferedImage bi = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 
-        Doodle d = DoodleFactory.INSTANCE.create();
+        Doodle d = DoodleFactory.create();
 
         d.setColor(new Color(0, 0, 255));
         d.setStartingPoint(0, 0);

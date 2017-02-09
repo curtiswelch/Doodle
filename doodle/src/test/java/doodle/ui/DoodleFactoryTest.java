@@ -8,21 +8,19 @@ public class DoodleFactoryTest {
 
     @Test
     public void testCreateDoodles() {
-        DoodleFactory factory = DoodleFactory.INSTANCE;
-
-        Doodle doodle = factory.create();
+        Doodle doodle = DoodleFactory.create();
 
         assertNotNull(doodle);
 
-        factory.switchType(DoodleFactory.DoodleType.ELLIPSE);
+        DoodleFactory.switchType(DoodleFactory.DoodleType.ELLIPSE);
 
-        doodle = factory.create();
+        doodle = DoodleFactory.create();
 
         assertNotNull(doodle);
 
-        factory.switchType(DoodleFactory.DoodleType.ROUNDED_BOX);
+        DoodleFactory.switchType(DoodleFactory.DoodleType.ROUNDED_BOX);
 
-        doodle = factory.create();
+        doodle = DoodleFactory.create();
 
         assertNotNull(doodle);
     }

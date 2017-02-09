@@ -12,10 +12,10 @@ import java.awt.event.MouseListener;
 
 public class DoodleTray extends TrayIcon implements MouseListener {
 
-    private Image startImage;
-    private Image stopImage;
+    private final Image startImage;
+    private final Image stopImage;
 
-    public DoodleTray(final Image startImage, Image stopImage) {
+    public DoodleTray(Image startImage, Image stopImage) {
         super(startImage, Strings.START_DOODLE.value());
 
         this.startImage = startImage;

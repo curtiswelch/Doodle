@@ -12,12 +12,12 @@ public enum DoodleFactory {
 
     private DoodleType type = DoodleType.BOX;
 
-    public void switchType(DoodleType type) {
-        this.type = type;
+    public static void switchType(DoodleType type) {
+        INSTANCE.type = type;
     }
 
-    public Doodle create() {
-        return this.type.create();
+    public static Doodle create() {
+        return INSTANCE.type.create();
     }
 
     public enum DoodleType {

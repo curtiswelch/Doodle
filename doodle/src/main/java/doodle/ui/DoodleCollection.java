@@ -35,7 +35,7 @@ public enum DoodleCollection {
     }
 
     public void addNewDoodle(int x, int y) {
-        this.newDoodle = DoodleFactory.INSTANCE.create();
+        this.newDoodle = DoodleFactory.create();
         this.newDoodle.setStartingPoint(x, y);
 
         this.newDoodle.setColor(DoodleColorRegistry.currentColor().getColor());
