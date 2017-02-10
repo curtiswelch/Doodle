@@ -1,7 +1,6 @@
 package doodle.event;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -72,28 +71,7 @@ public enum EventBus {
         Class<?> clazz = parameter.getType();
 
         listenerMap.computeIfAbsent(clazz, v -> new ArrayList<>(1))
-                .add(new Listener(object, method));
+                .add(new Listener(object, method, true));
     }
 
-    private class Listener {
-        private Object instance;
-        private Method method;
-
-        Listener(Object instance, Method method) {
-            this.instance = instance;
-            this.method = method;
-
-            if(!method.isAccessible()) {
-                this.method.setAccessible(true);
-            }
-        }
-
-        void invoke(Object value) {
-            try {
-                method.invoke(instance, value);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

@@ -14,74 +14,74 @@ public class DoodleCollectionTest {
 
     @Before
     public void setUpDoodles() {
-        DoodleCollection.INSTANCE.clearDoodles();
+        DoodleCollection.clearDoodles();
 
-        DoodleCollection.INSTANCE.addNewDoodle(20, 20);
-        DoodleCollection.INSTANCE.saveNewDoodle(100, 100);
+        DoodleCollection.addNewDoodle(20, 20);
+        DoodleCollection.saveNewDoodle(100, 100);
 
-        DoodleCollection.INSTANCE.addNewDoodle(200, 200);
-        DoodleCollection.INSTANCE.saveNewDoodle(100, 100);
+        DoodleCollection.addNewDoodle(200, 200);
+        DoodleCollection.saveNewDoodle(100, 100);
 
-        DoodleCollection.INSTANCE.addNewDoodle(500, 500);
-        DoodleCollection.INSTANCE.saveNewDoodle(1000, 1000);
+        DoodleCollection.addNewDoodle(500, 500);
+        DoodleCollection.saveNewDoodle(1000, 1000);
     }
 
     @Test
     public void canAddADoodle() {
-        DoodleCollection.INSTANCE.addNewDoodle(10, 10);
+        DoodleCollection.addNewDoodle(10, 10);
 
-        DoodleCollection.INSTANCE.saveNewDoodle(20, 20);
+        DoodleCollection.saveNewDoodle(20, 20);
 
-        List<Doodle> doodles = DoodleCollection.INSTANCE.doodles();
+        List<Doodle> doodles = DoodleCollection.doodles();
 
         assertEquals(4, doodles.size());
     }
 
     @Test
     public void onlyAddsDoodlesWithAMinimumSize() {
-        DoodleCollection.INSTANCE.addNewDoodle(0, 0);
-        DoodleCollection.INSTANCE.saveNewDoodle(1, 1);
+        DoodleCollection.addNewDoodle(0, 0);
+        DoodleCollection.saveNewDoodle(1, 1);
 
-        List<Doodle> doodles = DoodleCollection.INSTANCE.doodles();
+        List<Doodle> doodles = DoodleCollection.doodles();
 
         assertEquals(3, doodles.size());
     }
 
     @Test
     public void canClearDoodles() {
-        DoodleCollection.INSTANCE.clearDoodles();
+        DoodleCollection.clearDoodles();
 
-        List<Doodle> doodles = DoodleCollection.INSTANCE.doodles();
+        List<Doodle> doodles = DoodleCollection.doodles();
 
         assertEquals(0, doodles.size());
     }
 
     @Test
     public void canRemoveDoodleByCoordinates() {
-        DoodleCollection.INSTANCE.removeDoodleAt(50, 50);
+        DoodleCollection.removeDoodleAt(50, 50);
 
-        List<Doodle> doodles = DoodleCollection.INSTANCE.doodles();
+        List<Doodle> doodles = DoodleCollection.doodles();
 
         assertEquals(2, doodles.size());
     }
 
     @Test
     public void canUndoDoodleCreation() {
-        DoodleCollection.INSTANCE.undo();
+        DoodleCollection.undo();
 
-        List<Doodle> doodles = DoodleCollection.INSTANCE.doodles();
+        List<Doodle> doodles = DoodleCollection.doodles();
 
         assertEquals(2, doodles.size());
     }
 
     @Test
     public void canUpdateNewDoodle() {
-        DoodleCollection.INSTANCE.clearDoodles();
+        DoodleCollection.clearDoodles();
 
-        DoodleCollection.INSTANCE.addNewDoodle(0, 0);
-        DoodleCollection.INSTANCE.updateNewDoodle(10, 10);
+        DoodleCollection.addNewDoodle(0, 0);
+        DoodleCollection.updateNewDoodle(10, 10);
 
-        List<Doodle> doodles = DoodleCollection.INSTANCE.doodles();
+        List<Doodle> doodles = DoodleCollection.doodles();
 
         boolean isRightSize = doodles.get(0).hitTest(5, 5);
 

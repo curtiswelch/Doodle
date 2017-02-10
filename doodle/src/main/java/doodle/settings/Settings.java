@@ -29,6 +29,7 @@ public enum Settings {
 
     private void doReload() {
         this.settings = new ArrayList<>();
+
         try {
             InputStream properties = propertiesInputStream();
 

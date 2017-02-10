@@ -12,79 +12,79 @@ import java.util.Optional;
 public enum DoodleCollection {
     INSTANCE;
 
-    private List<Doodle> doodles = new ArrayList<>();
-    private Doodle newDoodle;
+    private static List<Doodle> doodles = new ArrayList<>();
+    private static Doodle newDoodle;
 
-    public List<Doodle> doodles() {
-        List<Doodle> allDoodles = new ArrayList<>(this.doodles.size() + 1);
+    public static List<Doodle> doodles() {
+        List<Doodle> allDoodles = new ArrayList<>(doodles.size() + 1);
 
-        allDoodles.addAll(this.doodles);
+        allDoodles.addAll(doodles);
 
-        if (this.newDoodle != null) {
-            allDoodles.add(this.newDoodle);
+        if (newDoodle != null) {
+            allDoodles.add(newDoodle);
         }
 
         return allDoodles;
     }
 
-    public void clearDoodles() {
-        this.doodles = new ArrayList<>();
-        this.newDoodle = null;
+    public static void clearDoodles() {
+        doodles = new ArrayList<>();
+        newDoodle = null;
 
         postDoodlesChanged();
     }
 
-    public void addNewDoodle(int x, int y) {
-        this.newDoodle = DoodleFactory.create();
-        this.newDoodle.setStartingPoint(x, y);
+    public static void addNewDoodle(int x, int y) {
+        newDoodle = DoodleFactory.create();
+        newDoodle.setStartingPoint(x, y);
 
-        this.newDoodle.setColor(DoodleColorRegistry.currentColor().getColor());
-
-        postDoodlesChanged();
-    }
-
-    public void updateNewDoodle(int x, int y) {
-        this.newDoodle.setEndingPoint(x, y);
+        newDoodle.setColor(DoodleColorRegistry.currentColor().getColor());
 
         postDoodlesChanged();
     }
 
-    public void saveNewDoodle(int finalX, int finalY) {
-        this.newDoodle.setEndingPoint(finalX, finalY);
+    public static void updateNewDoodle(int x, int y) {
+        newDoodle.setEndingPoint(x, y);
 
-        if (this.newDoodle.isMinimumSize()) {
-            this.doodles.add(this.newDoodle);
+        postDoodlesChanged();
+    }
+
+    public static void saveNewDoodle(int finalX, int finalY) {
+        newDoodle.setEndingPoint(finalX, finalY);
+
+        if (newDoodle.isMinimumSize()) {
+            doodles.add(newDoodle);
         }
 
-        this.newDoodle = null;
+        newDoodle = null;
 
         postDoodlesChanged();
     }
 
-    public void removeDoodleAt(int x, int y) {
-        Optional<Doodle> remove = this.doodles.stream().
+    public static void removeDoodleAt(int x, int y) {
+        Optional<Doodle> remove = doodles.stream().
                 filter(doodle -> doodle.hitTest(x, y)).
                 max(Comparator.comparingInt(Doodle::getId));
 
-        remove.ifPresent(this::removeDoodle);
+        remove.ifPresent(DoodleCollection::removeDoodle);
     }
 
-    public void undo() {
-        if (!this.doodles.isEmpty()) {
-            int lastDoodleIndex = this.doodles.size() - 1;
-            Doodle lastDoodle = this.doodles.get(lastDoodleIndex);
+    public static void undo() {
+        if (!doodles.isEmpty()) {
+            int lastDoodleIndex = doodles.size() - 1;
+            Doodle lastDoodle = doodles.get(lastDoodleIndex);
 
             removeDoodle(lastDoodle);
         }
     }
 
-    private void removeDoodle(Doodle doodle) {
-        this.doodles.remove(doodle);
+    private static void removeDoodle(Doodle doodle) {
+        doodles.remove(doodle);
 
         postDoodlesChanged();
     }
 
-    private void postDoodlesChanged() {
+    private static void postDoodlesChanged() {
         EventBus.post(new DoodlesChanged());
     }
 }
