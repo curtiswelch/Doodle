@@ -21,7 +21,7 @@ public class DoodleColor {
         this.color = color;
     }
 
-    public DoodleColor(String definition) {
+    DoodleColor(String definition) {
         String[] definitionParts = splitDefinitionPartss(definition);
 
         this.label = definitionParts[NAME];

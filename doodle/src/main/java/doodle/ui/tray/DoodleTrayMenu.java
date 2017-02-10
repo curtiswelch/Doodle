@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class DoodleTrayMenu extends PopupMenu implements ActionListener {
 
-    public DoodleTrayMenu() {
+    DoodleTrayMenu() {
         MenuItem settings = new MenuItem(Strings.SETTINGS.value());
         settings.addActionListener(this);
 

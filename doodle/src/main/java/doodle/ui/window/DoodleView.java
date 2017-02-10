@@ -16,8 +16,6 @@ import java.awt.*;
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;
 
-    private DoodlePopupMenu menu;
-
     public DoodleView(DoodleController doodle) throws Exception {
         setupUI();
 
@@ -32,8 +30,7 @@ public class DoodleView extends JDialog {
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
 
-        this.menu = new DoodlePopupMenu(this);
-        this.add(this.menu);
+        this.add(new DoodlePopupMenu(this));
 
         this.addKeyListener(new DoodleKeyListener(doodle));
 
@@ -67,7 +64,7 @@ public class DoodleView extends JDialog {
 
         Graphics2D g = (Graphics2D) graphics;
 
-        for (Doodle doodleBox : DoodleCollection.INSTANCE.doodles()) {
+        for (Doodle doodleBox : DoodleCollection.doodles()) {
             doodleBox.draw(g);
         }
 

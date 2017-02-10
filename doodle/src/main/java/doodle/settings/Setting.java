@@ -4,7 +4,7 @@ public class Setting {
     private String name;
     private String value;
 
-    public Setting(String name, String value) {
+    Setting(String name, String value) {
         this.name = name;
         this.value = value;
     }

@@ -37,6 +37,7 @@ public enum Settings {
 
             processSettings(reader);
         } catch (IOException e) {
+            // This won't happen :(
         }
     }
 

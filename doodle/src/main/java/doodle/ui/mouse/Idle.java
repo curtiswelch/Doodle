@@ -22,7 +22,7 @@ public enum Idle implements MouseState {
         if (event.isPopupTrigger()) {
             EventBus.post(new MenuRequested(event.getX(), event.getY()));
         } else {
-            DoodleCollection.INSTANCE.removeDoodleAt(event.getX(), event.getY());
+            DoodleCollection.removeDoodleAt(event.getX(), event.getY());
         }
     }
 

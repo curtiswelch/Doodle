@@ -17,7 +17,7 @@ public abstract class Doodle {
         this.id = idGen.incrementAndGet();
     }
 
-    public int getId() {
+    int getId() {
         return this.id;
     }
 

@@ -34,7 +34,7 @@ public class Main {
     private static void addClearDoodles(DoodleController doodle) {
         doodle.addKeyHandler(KeyEvent.VK_C, event -> {
             if (event.isControlDown()) {
-                DoodleCollection.INSTANCE.clearDoodles();
+                DoodleCollection.clearDoodles();
             }
         });
     }
@@ -42,7 +42,7 @@ public class Main {
     private static void addUndoDoodle(DoodleController doodle) {
         doodle.addKeyHandler(KeyEvent.VK_Z, event -> {
             if (event.isControlDown()) {
-                DoodleCollection.INSTANCE.undo();
+                DoodleCollection.undo();
             }
         });
     }

@@ -1,8 +1,10 @@
 package doodle;
 
-import doodle.event.*;
+import doodle.event.EventBus;
+import doodle.event.HideViewRequested;
+import doodle.event.ShowViewRequested;
+import doodle.event.Subscribe;
 import doodle.ui.DoodleCollection;
-import doodle.ui.text.Strings;
 import doodle.ui.tray.DoodleTray;
 import doodle.ui.window.DoodleView;
 
@@ -11,32 +13,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class DoodleController {
     private DoodleView view;
-    private DoodleTray tray;
 
     private List<KeyInputAction> actions;
 
-    public DoodleController() throws Exception {
+    DoodleController() throws Exception {
         BufferedImage startImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle.png"));
         BufferedImage stopImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("doodle/images/doodle_stop.png"));
 
         this.actions = new ArrayList<>();
 
         this.view = new DoodleView(this);
-        this.tray = new DoodleTray(startImage, stopImage);
 
-        SystemTray.getSystemTray().add(this.tray);
+        SystemTray.getSystemTray().add(new DoodleTray(startImage, stopImage));
 
         EventBus.subscribe(this);
     }
 
-    public void addKeyHandler(int keyCode, Consumer<KeyEvent> handler) {
+    void addKeyHandler(int keyCode, Consumer<KeyEvent> handler) {
         this.actions.add(new KeyInputAction(keyCode, handler));
     }
 
@@ -53,7 +52,7 @@ public class DoodleController {
 
     @Subscribe
     private void onHideViewRequested(HideViewRequested hideViewRequested) {
-        DoodleCollection.INSTANCE.clearDoodles();
+        DoodleCollection.clearDoodles();
 
         SwingUtilities.invokeLater(new DoodleViewHider(this.view));
     }
