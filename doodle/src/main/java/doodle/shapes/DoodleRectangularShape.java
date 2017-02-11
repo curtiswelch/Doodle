@@ -1,5 +1,6 @@
 package doodle.shapes;
 
+import doodle.color.DoodleColorRegistry;
 import doodle.ui.Doodle;
 
 import java.awt.*;
@@ -42,7 +43,8 @@ public class DoodleRectangularShape extends Doodle {
 
     @Override
     public void draw(Graphics2D g) {
-        g.setColor(new Color(this.color.getRGB() + 838860800, true));
+        int opacity = DoodleColorRegistry.opacity() << 24;
+        g.setColor(new Color(this.color.getRGB() + opacity, true));
         g.fill(this.shape);
 
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

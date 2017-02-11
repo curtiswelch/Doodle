@@ -1,6 +1,9 @@
 package doodle.ui.mouse;
 
+import doodle.color.DoodleColorRegistry;
+
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 public class Mouse extends AbstractMouseListener {
     private MouseState state;
@@ -22,6 +25,11 @@ public class Mouse extends AbstractMouseListener {
     @Override
     public void mouseDragged(MouseEvent event) {
         this.state.mouseDragged(this, event);
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        DoodleColorRegistry.adjustOpacity(e.getPreciseWheelRotation());
     }
 
     void switchState(MouseState state, MouseEvent event) {

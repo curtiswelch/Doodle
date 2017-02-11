@@ -3,6 +3,7 @@ package doodle.ui.window;
 import doodle.DoodleController;
 import doodle.event.DoodlesChanged;
 import doodle.event.EventBus;
+import doodle.event.OpacityChanged;
 import doodle.event.Subscribe;
 import doodle.ui.Doodle;
 import doodle.ui.DoodleCollection;
@@ -38,6 +39,7 @@ public class DoodleView extends JDialog {
 
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
+        this.addMouseWheelListener(mouse);
 
         EventBus.subscribe(this);
     }
@@ -55,6 +57,11 @@ public class DoodleView extends JDialog {
 
     @Subscribe
     private void onDoodlesChanged(DoodlesChanged event) {
+        this.repaint();
+    }
+
+    @Subscribe
+    private void onOpacityChanged(OpacityChanged event) {
         this.repaint();
     }
 

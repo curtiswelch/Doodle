@@ -2,6 +2,7 @@ package doodle.color;
 
 import doodle.event.ColorChanged;
 import doodle.event.EventBus;
+import doodle.event.OpacityChanged;
 import doodle.settings.Settings;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public enum DoodleColorRegistry {
 
     private DoodleColor currentColor;
 
+    private double opacity = 50.0;
+
     DoodleColorRegistry() {
         loadSettings();
         this.currentColor = this.colors.get(0);
@@ -29,6 +32,16 @@ public enum DoodleColorRegistry {
     public static void currentColor(DoodleColor color) {
         INSTANCE.currentColor = color;
         EventBus.post(new ColorChanged(color));
+    }
+
+    public static void adjustOpacity(double distance) {
+        INSTANCE.opacity = Math.max(1.0, Math.min(INSTANCE.opacity - distance * 10.0, 255.0));
+
+        EventBus.post(new OpacityChanged());
+    }
+
+    public static int opacity() {
+        return ((int) INSTANCE.opacity) & 255;
     }
 
     public static Optional<DoodleColor> getByLabel(String label) {

@@ -1,10 +1,8 @@
 package doodle.ui.mouse;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
-public abstract class AbstractMouseListener implements MouseListener, MouseMotionListener {
+public abstract class AbstractMouseListener implements MouseListener, MouseMotionListener, MouseWheelListener {
     public abstract void mousePressed(MouseEvent e);
 
     public abstract void mouseReleased(MouseEvent e);
@@ -25,5 +23,9 @@ public abstract class AbstractMouseListener implements MouseListener, MouseMotio
 
     @Override
     public void mouseMoved(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
     }
 }

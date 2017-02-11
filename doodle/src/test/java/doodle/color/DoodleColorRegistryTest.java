@@ -40,4 +40,13 @@ public class DoodleColorRegistryTest {
 
         assertEquals(doodleColor, DoodleColorRegistry.currentColor());
     }
+
+    @Test
+    public void canAdjustOpacity() {
+        int opacity = DoodleColorRegistry.opacity();
+
+        DoodleColorRegistry.adjustOpacity(-1);
+
+        assertEquals(opacity + 10, DoodleColorRegistry.opacity());
+    }
 }
