@@ -3,3 +3,5 @@
 .settings/
 target/
 RemoteSystemsTempFiles/
+.idea/
+doodle/doodle.iml
