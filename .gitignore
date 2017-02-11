@@ -5,3 +5,5 @@ target/
 RemoteSystemsTempFiles/
 .idea/
 doodle/doodle.iml
+doodle/.classpath
+doodle/.project
