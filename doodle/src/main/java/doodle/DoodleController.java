@@ -54,19 +54,7 @@ public class DoodleController {
     private void onHideViewRequested(HideViewRequested hideViewRequested) {
         DoodleCollection.clearDoodles();
 
-        SwingUtilities.invokeLater(new DoodleViewHider(this.view));
+        SwingUtilities.invokeLater(() -> this.view.setVisible(false));
     }
 
-    class DoodleViewHider implements Runnable {
-        private DoodleView view;
-
-        DoodleViewHider(DoodleView view) {
-            this.view = view;
-        }
-
-        @Override
-        public void run() {
-            this.view.setVisible(false);
-        }
-    }
 }
