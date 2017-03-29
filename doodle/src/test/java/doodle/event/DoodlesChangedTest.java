@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 public class DoodlesChangedTest {
     @Test
-    public void handlesColorChangedEvent() {
+    public void handlesDoodleChangedEvent() {
         DoodlesChangedHandler doodlesChangedHandler = new DoodlesChangedHandler();
 
         EventBus.subscribe(doodlesChangedHandler);
