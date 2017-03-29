@@ -55,9 +55,11 @@ public enum DoodleColorRegistry {
     private void loadSettings() {
         this.colors = new ArrayList<>();
 
+        StringDefinitionParser parser = new StringDefinitionParser();
+
         Settings.settings().forEach(setting -> {
             if (setting.name().startsWith("color.")) {
-                this.colors.add(new DoodleColor(setting.value()));
+                this.colors.add(parser.parse(setting.value()));
             }
         });
     }
