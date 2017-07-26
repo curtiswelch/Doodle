@@ -3,7 +3,7 @@ package doodle.color;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import static org.junit.Assert.assertEquals;

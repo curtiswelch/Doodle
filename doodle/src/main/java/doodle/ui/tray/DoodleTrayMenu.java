@@ -2,7 +2,8 @@ package doodle.ui.tray;
 
 import doodle.ui.text.Strings;
 
-import java.awt.*;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

@@ -9,7 +9,7 @@ import doodle.ui.DoodleFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.awt.event.KeyEvent;
 
 public class Main {
@@ -24,7 +24,6 @@ public class Main {
             addHideDoodle(doodle);
             addShapes(doodle);
             addColors(doodle);
-
         } catch (Exception e) {
             log.error(e);
             JOptionPane.showMessageDialog(null, "Something bad happened :(");

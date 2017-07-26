@@ -6,7 +6,8 @@ import doodle.event.ShowViewRequested;
 import doodle.event.Subscribe;
 import doodle.ui.text.Strings;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.TrayIcon;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

@@ -9,8 +9,8 @@ import doodle.ui.tray.DoodleTray;
 import doodle.ui.window.DoodleView;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.SwingUtilities;
+import java.awt.SystemTray;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

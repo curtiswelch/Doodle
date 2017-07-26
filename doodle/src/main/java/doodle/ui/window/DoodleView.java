@@ -11,8 +11,16 @@ import doodle.ui.menu.DoodlePopupMenu;
 import doodle.ui.mouse.Mouse;
 import doodle.ui.text.Strings;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JDialog;
+import javax.swing.UIManager;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 
 public class DoodleView extends JDialog {
     private static final long serialVersionUID = 1;

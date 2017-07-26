@@ -3,13 +3,17 @@ package doodle.shapes;
 import doodle.color.DoodleColorRegistry;
 import doodle.ui.Doodle;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.RectangularShape;
 
 public class DoodleRectangularShape extends Doodle {
     private static final int MIN_SIZE = 5;
 
-    private Color color;
+    private Color
+            color;
 
     private int x1;
     private int y1;

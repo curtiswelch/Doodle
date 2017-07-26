@@ -2,10 +2,12 @@ package doodle.ui;
 
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DoodleTest {
 

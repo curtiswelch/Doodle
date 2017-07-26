@@ -12,57 +12,57 @@ import java.util.Optional;
 public enum DoodleCollection {
     INSTANCE;
 
-    private static List<Doodle> doodles = new ArrayList<>();
-    private static Doodle newDoodle;
+    private List<Doodle> doodles = new ArrayList<>();
+    private Doodle newDoodle;
 
     public static List<Doodle> doodles() {
-        List<Doodle> allDoodles = new ArrayList<>(doodles.size() + 1);
+        List<Doodle> allDoodles = new ArrayList<>(INSTANCE.doodles.size() + 1);
 
-        allDoodles.addAll(doodles);
+        allDoodles.addAll(INSTANCE.doodles);
 
-        if (newDoodle != null) {
-            allDoodles.add(newDoodle);
+        if (INSTANCE.newDoodle != null) {
+            allDoodles.add(INSTANCE.newDoodle);
         }
 
         return allDoodles;
     }
 
     public static void clearDoodles() {
-        doodles = new ArrayList<>();
-        newDoodle = null;
+        INSTANCE.doodles = new ArrayList<>();
+        INSTANCE.newDoodle = null;
 
         postDoodlesChanged();
     }
 
     public static void addNewDoodle(int x, int y) {
-        newDoodle = DoodleFactory.create();
-        newDoodle.setStartingPoint(x, y);
+        INSTANCE.newDoodle = DoodleFactory.create();
+        INSTANCE.newDoodle.setStartingPoint(x, y);
 
-        newDoodle.setColor(DoodleColorRegistry.currentColor().getColor());
+        INSTANCE.newDoodle.setColor(DoodleColorRegistry.currentColor().getColor());
 
         postDoodlesChanged();
     }
 
     public static void updateNewDoodle(int x, int y) {
-        newDoodle.setEndingPoint(x, y);
+        INSTANCE.newDoodle.setEndingPoint(x, y);
 
         postDoodlesChanged();
     }
 
     public static void saveNewDoodle(int finalX, int finalY) {
-        newDoodle.setEndingPoint(finalX, finalY);
+        INSTANCE.newDoodle.setEndingPoint(finalX, finalY);
 
-        if (newDoodle.isMinimumSize()) {
-            doodles.add(newDoodle);
+        if (INSTANCE.newDoodle.isMinimumSize()) {
+            INSTANCE.doodles.add(INSTANCE.newDoodle);
         }
 
-        newDoodle = null;
+        INSTANCE.newDoodle = null;
 
         postDoodlesChanged();
     }
 
     public static void removeDoodleAt(int x, int y) {
-        Optional<Doodle> remove = doodles.stream().
+        Optional<Doodle> remove = INSTANCE.doodles.stream().
                 filter(doodle -> doodle.hitTest(x, y)).
                 max(Comparator.comparingInt(Doodle::getId));
 
@@ -70,16 +70,16 @@ public enum DoodleCollection {
     }
 
     public static void undo() {
-        if (!doodles.isEmpty()) {
-            int lastDoodleIndex = doodles.size() - 1;
-            Doodle lastDoodle = doodles.get(lastDoodleIndex);
+        if (!INSTANCE.doodles.isEmpty()) {
+            int lastDoodleIndex = INSTANCE.doodles.size() - 1;
+            Doodle lastDoodle = INSTANCE.doodles.get(lastDoodleIndex);
 
             removeDoodle(lastDoodle);
         }
     }
 
     private static void removeDoodle(Doodle doodle) {
-        doodles.remove(doodle);
+        INSTANCE.doodles.remove(doodle);
 
         postDoodlesChanged();
     }

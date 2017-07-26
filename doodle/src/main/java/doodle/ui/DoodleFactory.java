@@ -2,7 +2,7 @@ package doodle.ui;
 
 import doodle.shapes.DoodleRectangularShape;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.function.Supplier;

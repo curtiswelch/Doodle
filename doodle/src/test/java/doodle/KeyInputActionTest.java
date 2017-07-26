@@ -3,10 +3,13 @@ package doodle;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class KeyInputActionTest {
     private KeyInputAction action;
@@ -44,6 +47,5 @@ public class KeyInputActionTest {
 
         assertEquals('t', event.getKeyChar());
     }
-
 
 }

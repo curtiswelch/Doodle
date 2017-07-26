@@ -1,6 +1,6 @@
 package doodle.color;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 

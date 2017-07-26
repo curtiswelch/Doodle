@@ -2,11 +2,17 @@ package doodle.ui.menu;
 
 import doodle.color.DoodleColor;
 import doodle.color.DoodleColorRegistry;
-import doodle.event.*;
+import doodle.event.ColorChanged;
+import doodle.event.EventBus;
+import doodle.event.HideViewRequested;
+import doodle.event.MenuRequested;
+import doodle.event.Subscribe;
 import doodle.ui.text.Strings;
 import doodle.ui.window.DoodleView;
 
-import java.awt.*;
+import java.awt.CheckboxMenuItem;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Optional;

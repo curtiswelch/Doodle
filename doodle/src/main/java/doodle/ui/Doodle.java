@@ -1,6 +1,7 @@
 package doodle.ui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Doodle {
